@@ -1,6 +1,5 @@
 package com.revature.models;
 
-
 import java.util.Objects;
 
 import javax.persistence.*;
