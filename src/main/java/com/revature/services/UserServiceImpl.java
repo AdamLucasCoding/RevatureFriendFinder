@@ -23,8 +23,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User updateUser(User user) {
-		User target = urepo.findById(user.getUserId()).stream().findFirst().get();
-		target.setUserName(user.getUserName());
+		User target = urepo.findById(user.getId()).stream().findFirst().get();
+		target.setUsername(user.getUsername());
 		target.setPassword(user.getPassword());
 		target.setEmail(user.getEmail());
 		return urepo.save(target);

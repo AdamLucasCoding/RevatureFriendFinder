@@ -1,78 +1,42 @@
 package com.revature.models;
 
-import java.util.Objects;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name="participations")
-public class Participation {
+import lombok.Data;
 
-	private int participationId;
-	private User user;
+@Entity
+@Data
+@Table(name="activity_participants")
+public class ActivityParticipant {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id")
+	private int id;
+	
+	@ManyToOne
+    @JoinColumn(name ="user_id", referencedColumnName = "id")
+	private User participant;
+	
+	@ManyToOne
+    @JoinColumn(name ="activity_id", referencedColumnName = "id")
 	private Activity activity;
 	
-	public Participation() {
+	public ActivityParticipant() {
 		super();
 	}
-	
-	public Participation(User user, Activity activity) {
+
+	public ActivityParticipant(User participant, Activity activity) {
 		super();
-		this.user = user;
+		this.participant = participant;
 		this.activity = activity;
 	}
-	
-	public Participation(int participationId, User user, Activity activity) {
+
+	public ActivityParticipant(int id, User participant, Activity activity) {
 		super();
-		this.participationId = participationId;
-		this.user = user;
+		this.id = id;
+		this.participant = participant;
 		this.activity = activity;
-	}
-	
-	public int getParticipationId() {
-		return participationId;
-	}
-	
-	public void setParticipationId(int participationId) {
-		this.participationId = participationId;
-	}
-	
-	public User getUser() {
-		return user;
-	}
-	
-	public void setUser(User user) {
-		this.user = user;
-	}
-	
-	public Activity getActivity() {
-		return activity;
-	}
-	
-	public void setActivity(Activity activity) {
-		this.activity = activity;
-	}
-	
-	@Override
-	public String toString() {
-		return "Participation [participationId=" + participationId + ", user=" + user + ", activity=" + activity + "]";
-	}
-	
-	@Override
-	public int hashCode() {
-		return Objects.hash(activity, participationId, user);
-	}
-	
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Participation other = (Participation) obj;
-		return Objects.equals(activity, other.activity) && participationId == other.participationId
-				&& Objects.equals(user, other.user);
 	}
 }
