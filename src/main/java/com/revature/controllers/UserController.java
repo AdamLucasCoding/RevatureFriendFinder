@@ -3,7 +3,10 @@ package com.revature.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,40 +20,40 @@ import com.revature.services.UserService;
 public class UserController {
 	
 	@Autowired
-	private UserService userv;
+	private UserService userService;
 
-	@GetMapping(path="/register")
+	@PostMapping(path="/register")
 	public @ResponseBody User createUser(@RequestBody User user) {
-		return userv.createUser(user);
+		return userService.createUser(user);
 	}
 
 	@GetMapping(path="/user/{id}")
 	public @ResponseBody User getById(@RequestBody int id) {
-		return userv.getUserById(id);
+		return userService.getUserById(id);
 	}
 	
 	@GetMapping(path="/users")
 	public @ResponseBody List<User> getAll() {
-		return userv.getAllUsers();
+		return userService.getAllUsers();
 	}	
 	
 	@GetMapping(path="/login")
 	public @ResponseBody User userLogIn(String username, String password) {
-		return userv.userLogIn(username, password);
+		return userService.userLogIn(username, password);
 	}
 	
-	@GetMapping(path="/user/{id}/logout")
+	@GetMapping(path="/logout")
 	public boolean userLogout(User user) {
-		return userv.userLogOut(user);
+		return userService.userLogOut(user);
 	}
 	
-	@GetMapping(path="/user/{id}/update")
+	@PutMapping(path="/user")
 	public @ResponseBody User UpdateUser (@RequestBody User user) {
-		return userv.updateUser(user);
+		return userService.updateUser(user);
 	}
 	
-	@GetMapping(path="/user/{id}/delete")
-	public boolean deleteUser(@RequestBody User user) {
-		return userv.deleteUser(user);
+	@DeleteMapping(path="/user")
+	public @ResponseBody boolean deleteUser(@RequestBody User user) {
+		return userService.deleteUser(user);
 	}
 }
