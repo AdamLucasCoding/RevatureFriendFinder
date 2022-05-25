@@ -27,6 +27,7 @@ public class UserServiceImpl implements UserService {
 //		target.setUsername(user.getUsername());
 //		target.setPassword(user.getPassword());
 //		target.setEmail(user.getEmail());
+		System.out.println("@service layer, updateUser is: " + user.toString());
 		return urepo.save(user);
 	}
 
@@ -44,12 +45,18 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User getUserById(int id) {
-		return urepo.findById(id).stream().findFirst().get();
+		User tempUser = urepo.findById(id).get();
+		System.out.print("@UserService getuserById: " + tempUser.toString());
+		return tempUser;
 	}
 
 	@Override
 	public List<User> getAllUsers() {
-		return urepo.findAll();
+		List<User> allUsers = urepo.findAll();
+		for(User u : allUsers) {
+			System.out.println("@UserService getAllUsers: " + u.toString());
+		}
+		return allUsers;
 	}
 
 	@Override

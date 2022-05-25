@@ -24,18 +24,23 @@ public class UserController {
 
 	@PostMapping(path="/register")
 	public @ResponseBody User createUser(@RequestBody User user) {
-		System.out.println("the user is: " + user.toString());
+		System.out.println("@UserController createUser is: " + user.toString());
 		return userService.createUser(user);
 	}
 
-	@GetMapping(path="/user/{id}")
+	@GetMapping(path="/user/id")
 	public @ResponseBody User getById(@RequestBody int id) {
+		System.out.println("@UserControl getById: " + id);
 		return userService.getUserById(id);
 	}
 	
 	@GetMapping(path="/users")
 	public @ResponseBody List<User> getAll() {
-		return userService.getAllUsers();
+		List<User> allUsers = userService.getAllUsers();
+		for(User u : allUsers) {
+			System.out.println("@UserController getAll: " + u.toString());			
+		}
+		return allUsers;
 	}	
 	
 	@GetMapping(path="/login")
@@ -48,12 +53,12 @@ public class UserController {
 		return userService.userLogOut(user);
 	}
 	
-	@PutMapping(path="/user")
-	public @ResponseBody User UpdateUser (@RequestBody User user) {
+	@PutMapping(path="/user/update")
+	public @ResponseBody User updateUser (@RequestBody User user) {
 		return userService.updateUser(user);
 	}
 	
-	@DeleteMapping(path="/user")
+	@DeleteMapping(path="/user/delete")
 	public @ResponseBody boolean deleteUser(@RequestBody User user) {
 		return userService.deleteUser(user);
 	}

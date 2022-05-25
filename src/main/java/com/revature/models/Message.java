@@ -29,11 +29,11 @@ public class Message {
 	
 	@ManyToOne
     @JoinColumn(name ="activity_id", referencedColumnName = "id")
-	private Activity activity;
+	private Activity activity_id;
 	
 	@ManyToOne
     @JoinColumn(name ="author_id", referencedColumnName = "id")
-	private User author;
+	private User author_id;
 	
 	@Column(name="created_date")
 	private LocalDate timeStamp;
@@ -46,8 +46,8 @@ public class Message {
 	public Message(String text, Activity activity, User author, LocalDate timeStamp) {
 		super();
 		this.text = text;
-		this.activity = activity;
-		this.author = author;
+		this.activity_id = activity;
+		this.author_id = author;
 		this.timeStamp = timeStamp;
 	}
 
@@ -55,8 +55,8 @@ public class Message {
 		super();
 		this.id = id;
 		this.text = text;
-		this.activity = activity;
-		this.author = author;
+		this.activity_id = activity;
+		this.author_id = author;
 		this.timeStamp = timeStamp;
 	}
 }

@@ -37,7 +37,7 @@ public class Activity {
 	
 	@ManyToOne
     @JoinColumn(name ="created_by", referencedColumnName = "id")
-	private User createdBy;
+	private User created_by;
 	
 	@Column(name="occupancy_max", nullable=false)
 	private int occupancyMax;
@@ -53,7 +53,7 @@ public class Activity {
 		this.type = type;
 		this.location = location;
 		this.dateTime = dateTime;
-		this.createdBy = createdBy;
+		this.created_by = createdBy;
 		this.occupancyMax = occupancyMax;
 	}
 
@@ -65,8 +65,14 @@ public class Activity {
 		this.type = type;
 		this.location = location;
 		this.dateTime = dateTime;
-		this.createdBy = createdBy;
+		this.created_by = createdBy;
 		this.occupancyMax = occupancyMax;
+	}
+
+	@Override
+	public String toString() {
+		return "Activity [id=" + id + ", name=" + name + ", type=" + type + ", location=" + location + ", dateTime="
+				+ dateTime + ", createdBy=" + created_by + ", occupancyMax=" + occupancyMax + "]";
 	}
 	
 	
