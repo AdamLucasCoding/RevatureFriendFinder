@@ -17,8 +17,8 @@ public class User {
 	@Column(name="username", unique=true, nullable=false)
 	private String username;
 	
-	@Column(name="password", nullable=false)
-	private String password;
+	@Column(name="pword", nullable=false)
+	private String pword;
 	
 	@Column(name="email", unique=true, nullable=false)
 	private String email;
@@ -30,7 +30,7 @@ public class User {
 	public User(String userName, String password, String email) {
 		super();
 		this.username = userName;
-		this.password = password;
+		this.pword = password;
 		this.email = email;
 	}
 
@@ -38,7 +38,14 @@ public class User {
 		super();
 		this.id = id;
 		this.username = userName;
-		this.password = password;
+		this.pword = password;
 		this.email = email;
 	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", pword=" + pword + ", email=" + email + "]";
+	}
+	
+	
 }
