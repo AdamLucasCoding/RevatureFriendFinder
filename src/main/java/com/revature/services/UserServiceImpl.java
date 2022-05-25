@@ -44,7 +44,10 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User getUserById(int id) {
-		return urepo.findById(id).stream().findFirst().get();
+		//return urepo.findById(id).stream().findFirst().get();
+		System.out.println("ID: " + id);
+		
+		return urepo.findById(id).get();
 	}
 
 	@Override
