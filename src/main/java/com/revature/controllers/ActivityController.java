@@ -24,16 +24,12 @@ public class ActivityController {
 	
 	@PostMapping(path="/createactivity")
 	public @ResponseBody Activity createActivity(@RequestBody Activity activity) {
-		System.out.println("@ActivityController createActivity is: " + activity.toString());
 		return activityService.createActivity(activity);
 	}
 	
 	@GetMapping(path="/activities")
 	public @ResponseBody List<Activity> getAll() {
 		List<Activity> allActivities = activityService.getAllActivities();
-		for(Activity a : allActivities) {
-			System.out.println("@ActionController getAll: " + a.toString());
-		}
 		return allActivities;
 	}
 	

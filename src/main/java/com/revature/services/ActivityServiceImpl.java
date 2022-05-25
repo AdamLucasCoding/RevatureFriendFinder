@@ -19,9 +19,6 @@ public class ActivityServiceImpl implements ActivityService {
 	@Override
 	public List<Activity> getAllActivities() {
 		List<Activity> allActivities = arepo.findAll();
-		for(Activity a: allActivities) {
-			System.out.println("@service layer.  allActivities: " + a.toString());
-		}
 		return allActivities;
 	}
 
@@ -50,12 +47,7 @@ public class ActivityServiceImpl implements ActivityService {
 
 	@Override
 	public List<Activity> getActivitiesByType(String type) {
-		System.out.println("Looking for type: " + type);
 		List<Activity> activitiesByType = arepo.findByType(type);
-		System.out.println("actvitiesByType: " + activitiesByType.toString());
-		for(Activity a : activitiesByType) {
-			System.out.println("@service, getActivitesByType: " + a.toString());
-		}
 		return activitiesByType;
 	}
 

@@ -46,16 +46,12 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User getUserById(int id) {
 		User tempUser = urepo.findById(id).get();
-		System.out.print("@UserService getuserById: " + tempUser.toString());
 		return tempUser;
 	}
 
 	@Override
 	public List<User> getAllUsers() {
 		List<User> allUsers = urepo.findAll();
-		for(User u : allUsers) {
-			System.out.println("@UserService getAllUsers: " + u.toString());
-		}
 		return allUsers;
 	}
 

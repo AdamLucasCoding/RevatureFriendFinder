@@ -24,22 +24,17 @@ public class UserController {
 
 	@PostMapping(path="/register")
 	public @ResponseBody User createUser(@RequestBody User user) {
-		System.out.println("@UserController createUser is: " + user.toString());
 		return userService.createUser(user);
 	}
 
 	@GetMapping(path="/user/id")
 	public @ResponseBody User getById(@RequestBody int id) {
-		System.out.println("@UserControl getById: " + id);
 		return userService.getUserById(id);
 	}
 	
 	@GetMapping(path="/users")
 	public @ResponseBody List<User> getAll() {
 		List<User> allUsers = userService.getAllUsers();
-		for(User u : allUsers) {
-			System.out.println("@UserController getAll: " + u.toString());			
-		}
 		return allUsers;
 	}	
 	
