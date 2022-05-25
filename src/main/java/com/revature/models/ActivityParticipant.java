@@ -1,7 +1,17 @@
 package com.revature.models;
 
 
-import javax.persistence.*;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import lombok.Data;
 
@@ -16,7 +26,7 @@ public class ActivityParticipant {
 	private int id;
 	
 	@ManyToOne
-    @JoinColumn(name ="user_id", referencedColumnName = "id")
+	@JoinColumn(name ="user_id", referencedColumnName = "id")
 	private User participant;
 	
 	@ManyToOne
@@ -39,4 +49,5 @@ public class ActivityParticipant {
 		this.participant = participant;
 		this.activity = activity;
 	}
+	
 }
