@@ -10,5 +10,4 @@ import com.revature.models.ActivityParticipant;
 @RequestMapping("/api")
 public class ActivityParticipantController {
 	
-	
 }
