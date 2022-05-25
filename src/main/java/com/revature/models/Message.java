@@ -59,4 +59,52 @@ public class Message {
 		this.author_id = author;
 		this.timeStamp = timeStamp;
 	}
+
+	@Override
+	public String toString() {
+		return "Message [id=" + id + ", text=" + text + ", activity_id=" + activity_id + ", author_id=" + author_id
+				+ ", timeStamp=" + timeStamp + "]";
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public Activity getActivity_id() {
+		return activity_id;
+	}
+
+	public void setActivity_id(Activity activity_id) {
+		this.activity_id = activity_id;
+	}
+
+	public User getAuthor_id() {
+		return author_id;
+	}
+
+	public void setAuthor_id(User author_id) {
+		this.author_id = author_id;
+	}
+
+	public LocalDate getTimeStamp() {
+		return timeStamp;
+	}
+
+	public void setTimeStamp(LocalDate timeStamp) {
+		this.timeStamp = timeStamp;
+	}
+	
+	
 }

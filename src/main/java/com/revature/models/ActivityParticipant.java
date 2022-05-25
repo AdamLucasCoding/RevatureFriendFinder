@@ -39,4 +39,30 @@ public class ActivityParticipant {
 		this.participant = participant;
 		this.activity = activity;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public User getParticipant() {
+		return participant;
+	}
+
+	public void setParticipant(User participant) {
+		this.participant = participant;
+	}
+
+	public Activity getActivity() {
+		return activity;
+	}
+
+	public void setActivity(Activity activity) {
+		this.activity = activity;
+	}
+	
+	
 }
