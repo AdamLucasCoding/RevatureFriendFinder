@@ -19,11 +19,11 @@ public class ActivityParticipant {
 	
 	@ManyToOne
     @JoinColumn(name ="user_id", referencedColumnName = "id")
-	private User participant;
+	private User user_id;
 	
 	@ManyToOne
     @JoinColumn(name ="activity_id", referencedColumnName = "id")
-	private Activity activity;
+	private Activity activity_id;
 	
 	public ActivityParticipant() {
 		super();
@@ -31,15 +31,15 @@ public class ActivityParticipant {
 
 	public ActivityParticipant(User participant, Activity activity) {
 		super();
-		this.participant = participant;
-		this.activity = activity;
+		this.user_id = participant;
+		this.activity_id = activity;
 	}
 
 	public ActivityParticipant(int id, User participant, Activity activity) {
 		super();
 		this.id = id;
-		this.participant = participant;
-		this.activity = activity;
+		this.user_id = participant;
+		this.activity_id = activity;
 	}
 
 	public int getId() {
@@ -51,29 +51,29 @@ public class ActivityParticipant {
 	}
 
 	public User getParticipant() {
-		return participant;
+		return user_id;
 	}
 
 	public void setParticipant(User participant) {
-		this.participant = participant;
+		this.user_id = participant;
 	}
 
 	public Activity getActivity() {
-		return activity;
+		return activity_id;
 	}
 
 	public void setActivity(Activity activity) {
-		this.activity = activity;
+		this.activity_id = activity;
 	}
 
 	@Override
 	public String toString() {
-		return "ActivityParticipant [id=" + id + ", participant=" + participant + ", activity=" + activity + "]";
+		return "ActivityParticipant [id=" + id + ", participant=" + user_id + ", activity=" + activity_id + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(activity, id, participant);
+		return Objects.hash(activity_id, id, user_id);
 	}
 
 	@Override
@@ -85,8 +85,8 @@ public class ActivityParticipant {
 		if (getClass() != obj.getClass())
 			return false;
 		ActivityParticipant other = (ActivityParticipant) obj;
-		return Objects.equals(activity, other.activity) && id == other.id
-				&& Objects.equals(participant, other.participant);
+		return Objects.equals(activity_id, other.activity_id) && id == other.id
+				&& Objects.equals(user_id, other.user_id);
 	}
 	
 	
