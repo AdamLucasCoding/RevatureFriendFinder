@@ -17,8 +17,9 @@ public class UserServiceImpl implements UserService {
 	private UserRepository urepo;
 	
 	@Override
-	public User createUser(User user) {
-		return urepo.save(user);
+	public boolean createUser(User user) {
+		int pk = urepo.save(user).getId();
+		return (pk > 0) ? true : false;
 	}
 
 	@Override

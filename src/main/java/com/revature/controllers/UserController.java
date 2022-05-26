@@ -12,27 +12,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.models.ClientMessage;
 import com.revature.models.User;
 import com.revature.services.UserService;
+import static com.revature.util.ClientMessageUtil.*;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/user")
 public class UserController {
 	
 	@Autowired
 	private UserService userService;
 
 	@PostMapping(path="/register")
-	public @ResponseBody User createUser(@RequestBody User user) {
-		return userService.createUser(user);
+	public @ResponseBody ClientMessage createUser(@RequestBody User user) {
+		return userService.createUser(user) ? CREATION_SUCCESSFUL : CREATION_FAILED;
 	}
 
-	@GetMapping(path="/user/id")
+	@GetMapping(path="/id")
 	public @ResponseBody User getById(@RequestBody int id) {
 		return userService.getUserById(id);
 	}
 	
-	@GetMapping(path="/users")
+	@GetMapping(path="/getall")
 	public @ResponseBody List<User> getAll() {
 		List<User> allUsers = userService.getAllUsers();
 		return allUsers;
@@ -48,12 +50,12 @@ public class UserController {
 		return userService.userLogOut(user);
 	}
 	
-	@PutMapping(path="/user/update")
+	@PutMapping(path="/update")
 	public @ResponseBody User updateUser (@RequestBody User user) {
 		return userService.updateUser(user);
 	}
 	
-	@DeleteMapping(path="/user/delete")
+	@DeleteMapping(path="/delete")
 	public @ResponseBody boolean deleteUser(@RequestBody User user) {
 		return userService.deleteUser(user);
 	}
