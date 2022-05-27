@@ -153,7 +153,7 @@ public class UserControllerTests {
 	@Test
 	@Order(3)
 	@DisplayName("3. Get User by ID - Happy Path Scenerio Test")
-	@Disabled
+	
 	public void testGetById() throws Exception {
 		when(service.getUserById(1)).thenReturn(mockUser1);
 		RequestBuilder request = MockMvcRequestBuilders.get("/api/user/id?id=1");
@@ -164,10 +164,10 @@ public class UserControllerTests {
 	@Test
 	@Order(4)
 	@DisplayName("4. Get All Candies - Happy Path Scenerio Test")
-	@Disabled
+	
 	public void testGetAll() throws Exception {
 		when(service.getAllUsers()).thenReturn(dummyDb);
-		RequestBuilder request = MockMvcRequestBuilders.get("/api/users");
+		RequestBuilder request = MockMvcRequestBuilders.get("/api/user/getall");
 		MvcResult result = mockmvc.perform(request).andReturn();
 		assertEquals(om.writeValueAsString(dummyDb), result.getResponse().getContentAsString());
 	}
@@ -175,11 +175,11 @@ public class UserControllerTests {
 	@Test
 	@Order(5)
 	@DisplayName("5. Update an Existing User - Happy Path Scenerio Test")
-	@Disabled
+	
 	// @Disabled("Disabled until CreateUserTest is up!")
 	public void testUpdateUser() throws Exception {
-		when(service.updateUser(mockUserModification)).thenReturn(mockUserModification);
-		RequestBuilder request = MockMvcRequestBuilders.put("/api/user")
+		when(service.updateUser(mockUserModification)).thenReturn(true);
+		RequestBuilder request = MockMvcRequestBuilders.put("/api/user/update")
 				.accept(MediaType.APPLICATION_JSON_VALUE)
 				.content(om.writeValueAsString(mockUserModification))
 				.contentType(MediaType.APPLICATION_JSON);
@@ -191,10 +191,10 @@ public class UserControllerTests {
 	@Test
 	@Order(6)
 	@DisplayName("6. Delete User - Happy Path Scenerio Test")
-	@Disabled
+	
 	public void testDeleteUser() throws Exception {
 		when(service.deleteUser(mockUserDeletion)).thenReturn(true);
-		RequestBuilder request = MockMvcRequestBuilders.delete("/api/user")
+		RequestBuilder request = MockMvcRequestBuilders.delete("/api/user/delete")
 				.accept(MediaType.APPLICATION_JSON_VALUE)
 				.content(om.writeValueAsString(mockUserDeletion))
 				.contentType(MediaType.APPLICATION_JSON);

@@ -51,12 +51,12 @@ public class UserController {
 	}
 	
 	@PutMapping(path="/update")
-	public @ResponseBody User updateUser (@RequestBody User user) {
-		return userService.updateUser(user);
+	public @ResponseBody ClientMessage updateUser (@RequestBody User user) {
+		return userService.updateUser(user) ? UPDATE_SUCCESSFUL : UPDATE_FAILED;
 	}
 	
 	@DeleteMapping(path="/delete")
-	public @ResponseBody boolean deleteUser(@RequestBody User user) {
-		return userService.deleteUser(user);
+	public @ResponseBody ClientMessage deleteUser(@RequestBody User user) {
+		return userService.deleteUser(user) ? DELETION_SUCCESSFUL : DELETION_FAILED;
 	}
 }

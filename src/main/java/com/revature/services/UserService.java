@@ -21,7 +21,7 @@ public interface UserService {
 	boolean userLogOut(User user);
 	
 	// update user -- returns updated user object
-	User updateUser(User user);
+	boolean updateUser(User user);
 
 	// delete user
 	boolean deleteUser(User user);

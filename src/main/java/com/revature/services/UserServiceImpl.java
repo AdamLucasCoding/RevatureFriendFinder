@@ -23,13 +23,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User updateUser(User user) {
+	public boolean updateUser(User user) {
 //		User target = urepo.findById(user.getId()).stream().findFirst().get();
 //		target.setUsername(user.getUsername());
 //		target.setPassword(user.getPassword());
 //		target.setEmail(user.getEmail());
 		System.out.println("@service layer, updateUser is: " + user.toString());
-		return urepo.save(user);
+		return urepo.save(user) != null ? true : false;
 	}
 
 	@Override
