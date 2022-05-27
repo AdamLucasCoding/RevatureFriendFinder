@@ -13,49 +13,52 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.models.ClientMessage;
 import com.revature.models.User;
 import com.revature.services.UserService;
+import com.revature.util.ClientMessageUtil;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/user")
 public class UserController {
 	
 	@Autowired
 	private UserService userService;
 
 	@PostMapping(path="/register")
-	public @ResponseBody User createUser(@RequestBody User user) {
+	public @ResponseBody ClientMessage createUser(@RequestBody User user) {
 		System.out.println("the user is: " + user.toString());
-		return userService.createUser(user);
+		return userService.create(user) ? ClientMessageUtil.CREATION_SUCCESSFUL : ClientMessageUtil.CREATION_FAILED;
 	}
 
-	@GetMapping(path="/user/{id}")
+	@GetMapping(path="/{id}")
 	public @ResponseBody User getById(@PathVariable int id) {
-		return userService.getUserById(id);
+		return userService.findById(id);
 	}
 	
-	@GetMapping(path="/users")
+	@GetMapping(path="/all")
 	public @ResponseBody List<User> getAll() {
-		return userService.getAllUsers();
+		return userService.findAll();
 	}	
 	
 	@GetMapping(path="/login")
 	public @ResponseBody User userLogIn(String username, String password) {
-		return userService.userLogIn(username, password);
+		return userService.logIn(username, password);
 	}
 	
 	@GetMapping(path="/logout")
 	public boolean userLogout(User user) {
-		return userService.userLogOut(user);
+		return userService.logOut(user);
 	}
 	
-	@PutMapping(path="/user")
-	public @ResponseBody User UpdateUser (@RequestBody User user) {
-		return userService.updateUser(user);
+	@PutMapping(path="/")
+	public @ResponseBody ClientMessage update (@RequestBody User user) {
+		return userService.update(user) ? ClientMessageUtil.UPDATE_SUCCESSFUL : ClientMessageUtil.UPDATE_FAILED;
 	}
 	
-	@DeleteMapping(path="/user")
-	public @ResponseBody boolean deleteUser(@RequestBody User user) {
-		return userService.deleteUser(user);
+	@DeleteMapping(path="/")
+	public @ResponseBody ClientMessage deleteUser(@RequestBody User user) {
+		userService.delete(user);
+		return ClientMessageUtil.DELETION_SUCCESSFUL;
 	}
 }

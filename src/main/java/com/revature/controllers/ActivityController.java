@@ -1,4 +1,5 @@
 package com.revature.controllers;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -17,37 +18,45 @@ import com.revature.models.Activity;
 import com.revature.models.ClientMessage;
 import com.revature.services.ActivityService;
 import com.revature.util.ClientMessageUtil;
+import io.swagger.annotations.*;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/activity")
+@Api(value = "ActivityRestController")
 public class ActivityController {
-	
+
 	@Autowired
 	private ActivityService activityService;
 
-	@PostMapping(path="/register")
-	public @ResponseBody ClientMessage createUser(@RequestBody Activity activity) {
-		return activityService.create(activity) ? ClientMessageUtil.CREATION_SUCCESSFUL : ClientMessageUtil.CREATION_FAILED;
+	@PostMapping(path = "/register")
+	@ApiOperation(value = "Create a new activity entity")
+	public @ResponseBody ClientMessage create(@RequestBody Activity activity) {
+		return activityService.create(activity) ? ClientMessageUtil.CREATION_SUCCESSFUL
+				: ClientMessageUtil.CREATION_FAILED;
 	}
 
-	@GetMapping(path="/activity/{id}")
-	public @ResponseBody Activity getById(@PathVariable int id) {
+	@ApiOperation(value = "Find activity by unique id", notes = "Provide an unique id to lookup a specific activity", response = Activity.class)
+	@GetMapping(path = "/{id}")
+	public @ResponseBody Activity findById(@PathVariable int id) {
 		Optional<Activity> activity = activityService.findById(id);
-		return activity.isPresent()? activity.get() : null;
+		return activity.isPresent() ? activity.get() : null;
 	}
-	
-	@GetMapping(path="/users")
-	public @ResponseBody List<Activity> getAll() {
+
+	@ApiOperation(value = "Find all activities")
+	@GetMapping(path = "/all")
+	public @ResponseBody List<Activity> findAll() {
 		return activityService.findAll();
 	}
-	
-	@PutMapping(path="/activity")
-	public @ResponseBody ClientMessage UpdateUser (@RequestBody Activity activity) {
-		return activityService.update(activity) ? ClientMessageUtil.UPDATE_SUCCESSFUL :  ClientMessageUtil.UPDATE_FAILED;
+
+	@PutMapping(path = "/")
+	@ApiOperation(value = "Update an existing activity entity")
+	public @ResponseBody ClientMessage update(@RequestBody Activity activity) {
+		return activityService.update(activity) ? ClientMessageUtil.UPDATE_SUCCESSFUL : ClientMessageUtil.UPDATE_FAILED;
 	}
-	
-	@DeleteMapping(path="/activity")
-	public @ResponseBody ClientMessage deleteUser(@RequestBody Activity activity) {
+
+	@DeleteMapping(path = "/")
+	@ApiOperation(value = "Delete an existing activity entity")
+	public @ResponseBody ClientMessage delete(@RequestBody Activity activity) {
 		activityService.delete(activity);
 		return ClientMessageUtil.DELETION_SUCCESSFUL;
 	}
