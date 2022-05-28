@@ -18,11 +18,11 @@ public class ActivityParticipant {
 	private int id;
 	
 	@ManyToOne
-    @JoinColumn(name ="user_id", referencedColumnName = "id")
-	private User user_id;
+    @JoinColumn(name ="u_id", referencedColumnName = "u_id")
+	private User u_id;
 	
 	@ManyToOne
-    @JoinColumn(name ="activity_id", referencedColumnName = "id")
+    @JoinColumn(name ="activity_id", referencedColumnName = "a_id")
 	private Activity activity_id;
 	
 	public ActivityParticipant() {
@@ -31,14 +31,14 @@ public class ActivityParticipant {
 
 	public ActivityParticipant(User participant, Activity activity) {
 		super();
-		this.user_id = participant;
+		this.u_id = participant;
 		this.activity_id = activity;
 	}
 
 	public ActivityParticipant(int id, User participant, Activity activity) {
 		super();
 		this.id = id;
-		this.user_id = participant;
+		this.u_id = participant;
 		this.activity_id = activity;
 	}
 
@@ -51,11 +51,11 @@ public class ActivityParticipant {
 	}
 
 	public User getParticipant() {
-		return user_id;
+		return u_id;
 	}
 
 	public void setParticipant(User participant) {
-		this.user_id = participant;
+		this.u_id = participant;
 	}
 
 	public Activity getActivity() {
@@ -68,12 +68,12 @@ public class ActivityParticipant {
 
 	@Override
 	public String toString() {
-		return "ActivityParticipant [id=" + id + ", participant=" + user_id + ", activity=" + activity_id + "]";
+		return "ActivityParticipant [id=" + id + ", participant=" + u_id + ", activity=" + activity_id + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(activity_id, id, user_id);
+		return Objects.hash(activity_id, id, u_id);
 	}
 
 	@Override
@@ -86,7 +86,7 @@ public class ActivityParticipant {
 			return false;
 		ActivityParticipant other = (ActivityParticipant) obj;
 		return Objects.equals(activity_id, other.activity_id) && id == other.id
-				&& Objects.equals(user_id, other.user_id);
+				&& Objects.equals(u_id, other.u_id);
 	}
 	
 	

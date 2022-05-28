@@ -13,10 +13,10 @@ import com.revature.models.ActivityParticipant;
 @Transactional
 public interface ActivityParticipantRepository extends JpaRepository<ActivityParticipant, Integer> {
 
-	@Query(value = "SELECT * FROM activity_participants WHERE activity_id = :activity_id")
+	@Query(value = "SELECT * FROM activity_participants WHERE activity_id = :activity_id", nativeQuery = true)
 	List<ActivityParticipant> findByActivity(int activity_id);
 	
-	@Query(value = "SELECT * FROM activity_participants WHERE user_id = :user_id")
+	@Query(value = "SELECT * FROM activity_participants WHERE user_id = :user_id", nativeQuery = true)
 	List<ActivityParticipant> findByUser(int user_id);
 
 }

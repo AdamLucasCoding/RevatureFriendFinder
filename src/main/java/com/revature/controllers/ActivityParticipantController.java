@@ -37,12 +37,12 @@ public class ActivityParticipantController {
 		return apService.getApByUser(user_id);
 	}
 	
-	@PutMapping(path="/user/update")
+	@PutMapping(path="/ap/update")
 	public @ResponseBody ActivityParticipant  updateAp(@RequestBody ActivityParticipant ap) {
 		return apService.updateAp(ap);
 	}
 	
-	@DeleteMapping(path="/user/delete")
+	@DeleteMapping(path="/ap/delete")
 	public @ResponseBody boolean deleteAp(@RequestBody ActivityParticipant ap) {
 		return apService.deleteAp(ap);
 	}

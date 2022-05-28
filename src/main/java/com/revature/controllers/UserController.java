@@ -21,7 +21,7 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
-
+	
 	@PostMapping(path="/register")
 	public @ResponseBody User createUser(@RequestBody User user) {
 		return userService.createUser(user);
@@ -40,7 +40,7 @@ public class UserController {
 	
 	@GetMapping(path="/login")
 	public @ResponseBody User userLogIn(String username, String password) {
-		return userService.userLogIn(username, password);
+		return null;
 	}
 	
 	@GetMapping(path="/logout")

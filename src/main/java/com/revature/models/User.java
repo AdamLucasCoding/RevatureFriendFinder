@@ -13,8 +13,8 @@ public class User {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
-	private int id;
+	@Column(name="u_id")
+	private int u_id;
 	
 	@Column(name="username", unique=true, nullable=false)
 	private String username;
@@ -38,7 +38,7 @@ public class User {
 
 	public User(int id, String userName, String password, String email) {
 		super();
-		this.id = id;
+		this.u_id = id;
 		this.username = userName;
 		this.pword = password;
 		this.email = email;
@@ -46,15 +46,15 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", pword=" + pword + ", email=" + email + "]";
+		return "User [id=" + u_id + ", username=" + username + ", pword=" + pword + ", email=" + email + "]";
 	}
 
 	public int getId() {
-		return id;
+		return u_id;
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.u_id = id;
 	}
 
 	public String getUsername() {
@@ -83,7 +83,7 @@ public class User {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(email, id, pword, username);
+		return Objects.hash(email, u_id, pword, username);
 	}
 
 	@Override
@@ -95,7 +95,7 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		return Objects.equals(email, other.email) && id == other.id && Objects.equals(pword, other.pword)
+		return Objects.equals(email, other.email) && u_id == other.u_id && Objects.equals(pword, other.pword)
 				&& Objects.equals(username, other.username);
 	}
 	
