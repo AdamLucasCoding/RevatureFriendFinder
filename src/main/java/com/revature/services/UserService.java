@@ -15,7 +15,7 @@ public interface UserService {
 	List<User> getAllUsers();	
 
 	// User log-in
-	User userLogIn(String username, String password);
+	User findUserByName(String username);
 	
 	// User log-out
 	boolean userLogOut(User user);

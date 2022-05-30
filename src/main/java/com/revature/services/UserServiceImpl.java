@@ -28,13 +28,14 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User userLogIn(String username, String password) {
+	public User findUserByName(String username) {
 		Optional<User> user = urepo.findAll()
 				.stream()
-				.filter(u -> (u.getUsername().equals(username) && u.getPword().equals(password)))
+				.filter(u -> (u.getUsername().equals(username)))
 				.findFirst();
 		return user.isPresent() ? user.get() : null;
 	}
+	
 
 	@Override
 	public boolean userLogOut(User user) {
