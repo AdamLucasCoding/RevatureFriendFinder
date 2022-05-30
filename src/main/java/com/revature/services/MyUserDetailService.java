@@ -17,7 +17,7 @@ public class MyUserDetailService implements UserDetailsService {
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		
-		return new User("foo", "foo", new ArrayList<>());
+		com.revature.models.User tempUser = userv.findUserByName(username);
+		return new User(tempUser.getUsername(), tempUser.getPword(), new ArrayList<>());
 	}
 }

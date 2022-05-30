@@ -1,21 +1,24 @@
 package com.revature.util;
 
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Service;
-
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-@Service
-public class JwtUtil {
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 
-    private String SECRET_KEY = "ultrasecret";
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+
+@Component
+public class JwtUtil implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+	private String SECRET_KEY = "ultrasecret";
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
