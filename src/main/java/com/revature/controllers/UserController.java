@@ -1,5 +1,6 @@
 package com.revature.controllers;
 
+import java.security.SecureRandom;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,6 +50,7 @@ public class UserController {
 
 	@PostMapping(path = "/register")
 	public @ResponseBody User createUser(@RequestBody User user) {
+		String encodedPassword = encodePassword(user.getPword());
 		return userService.createUser(user);
 	}
 
@@ -67,6 +70,14 @@ public class UserController {
 		return ResponseEntity.ok(new AuthenticationResponse(jwt));
 	}
 
+	private String encodePassword(String plainPassword) {
+
+		int strength = 10;
+		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(strength, new SecureRandom());
+		String encodedPassword = bCryptPasswordEncoder.encode(plainPassword);
+		return encodedPassword;
+	}
+	
 	private void authenticate(String username, String password) throws Exception {
 		try {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
