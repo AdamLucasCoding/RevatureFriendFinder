@@ -69,7 +69,7 @@ static void setUpBeforeClass() throws Exception {
     LocalDate dateTime = LocalDate.now();
 	
 	User author = new User(1,"satyanadala1","password","satyanadala1@microsoft.com");
-	Activity activity = new Activity(1, "Fighting","Hobby", "Atlanta", dateTime, author, 10);
+	Activity activity = new Activity(1, "Singing","Hobby", "Atlanta", dateTime, author, 10);
 	
 	mockMessage1 = new Message(1,"I am going to sing",activity , author,dateTime);
 	mockMessage2 = new Message(2,"I am going to dance",activity , author,dateTime);
