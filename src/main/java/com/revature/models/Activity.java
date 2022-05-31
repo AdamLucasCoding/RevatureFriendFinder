@@ -21,8 +21,8 @@ public class Activity {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
-	private int id;
+	@Column(name="a_id")
+	private int a_id;
 	
 	@Column(name="name", nullable=false)
 	private String name;
@@ -37,7 +37,7 @@ public class Activity {
 	private LocalDate dateTime;
 	
 	@ManyToOne
-    @JoinColumn(name ="created_by", referencedColumnName = "id")
+    @JoinColumn(name ="created_by", referencedColumnName = "u_id")
 	private User created_by;
 	
 	@Column(name="occupancy_max", nullable=false)
@@ -61,7 +61,7 @@ public class Activity {
 	public Activity(int id, String name, String type, String location, LocalDate dateTime, User createdBy,
 			int occupancyMax) {
 		super();
-		this.id = id;
+		this.a_id = id;
 		this.name = name;
 		this.type = type;
 		this.location = location;
@@ -72,16 +72,16 @@ public class Activity {
 
 	@Override
 	public String toString() {
-		return "Activity [id=" + id + ", name=" + name + ", type=" + type + ", location=" + location + ", dateTime="
+		return "Activity [id=" + a_id + ", name=" + name + ", type=" + type + ", location=" + location + ", dateTime="
 				+ dateTime + ", createdBy=" + created_by + ", occupancyMax=" + occupancyMax + "]";
 	}
 
 	public int getId() {
-		return id;
+		return a_id;
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.a_id = id;
 	}
 
 	public String getName() {
@@ -134,7 +134,7 @@ public class Activity {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(created_by, dateTime, id, location, name, occupancyMax, type);
+		return Objects.hash(created_by, dateTime, a_id, location, name, occupancyMax, type);
 	}
 
 	@Override
@@ -147,7 +147,7 @@ public class Activity {
 			return false;
 		Activity other = (Activity) obj;
 		return Objects.equals(created_by, other.created_by) && Objects.equals(dateTime, other.dateTime)
-				&& id == other.id && Objects.equals(location, other.location) && Objects.equals(name, other.name)
+				&& a_id == other.a_id && Objects.equals(location, other.location) && Objects.equals(name, other.name)
 				&& occupancyMax == other.occupancyMax && Objects.equals(type, other.type);
 	}
 	

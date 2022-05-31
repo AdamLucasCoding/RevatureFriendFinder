@@ -13,14 +13,14 @@ public class User {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
-	private int id;
+	@Column(name="u_id")
+	private int u_id;
 	
 	@Column(name="username", unique=true, nullable=false)
 	private String username;
 	
-	@Column(name="password", nullable=false)
-	private String password;
+	@Column(name="pword", nullable=false)
+	private String pword;
 	
 	@Column(name="email", unique=true, nullable=false)
 	private String email;
@@ -29,32 +29,32 @@ public class User {
 		super();
 	}
 
-	public User(String username, String password, String email) {
+	public User(String userName, String password, String email) {
 		super();
-		this.username = username;
-		this.password = password;
+		this.username = userName;
+		this.pword = password;
 		this.email = email;
 	}
 
-	public User(int id, String username, String password, String email) {
+	public User(int id, String userName, String password, String email) {
 		super();
-		this.id = id;
-		this.username = username;
-		this.password = password;
+		this.u_id = id;
+		this.username = userName;
+		this.pword = password;
 		this.email = email;
 	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + "]";
+		return "User [id=" + u_id + ", username=" + username + ", pword=" + pword + ", email=" + email + "]";
 	}
-	
+
 	public int getId() {
-		return id;
+		return u_id;
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.u_id = id;
 	}
 
 	public String getUsername() {
@@ -65,12 +65,12 @@ public class User {
 		this.username = username;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getPword() {
+		return pword;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPword(String pword) {
+		this.pword = pword;
 	}
 
 	public String getEmail() {
@@ -83,7 +83,7 @@ public class User {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(email, id, password, username);
+		return Objects.hash(email, u_id, pword, username);
 	}
 
 	@Override
@@ -95,7 +95,7 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		return Objects.equals(email, other.email) && id == other.id && Objects.equals(password, other.password)
+		return Objects.equals(email, other.email) && u_id == other.u_id && Objects.equals(pword, other.pword)
 				&& Objects.equals(username, other.username);
 	}
 	

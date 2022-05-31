@@ -1,6 +1,7 @@
 package com.revature.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,26 +18,24 @@ public class UserServiceImpl implements UserService {
 	private UserRepository urepo;
 	
 	@Override
-	public boolean createUser(User user) {
-		int pk = urepo.save(user).getId();
-		return (pk > 0) ? true : false;
+	public User createUser(User user) {
+		return urepo.save(user);
 	}
 
 	@Override
-	public boolean updateUser(User user) {
-//		User target = urepo.findById(user.getId()).stream().findFirst().get();
-//		target.setUsername(user.getUsername());
-//		target.setPassword(user.getPassword());
-//		target.setEmail(user.getEmail());
-		System.out.println("@service layer, updateUser is: " + user.toString());
-		return urepo.save(user) != null ? true : false;
+	public User updateUser(User user) {
+		return urepo.save(user);
 	}
 
 	@Override
-	public User userLogIn(String username, String password) {
-		// TODO Auto-generated method stub
-		return null;
+	public User findUserByName(String username) {
+		Optional<User> user = urepo.findAll()
+				.stream()
+				.filter(u -> (u.getUsername().equals(username)))
+				.findFirst();
+		return user.isPresent() ? user.get() : null;
 	}
+	
 
 	@Override
 	public boolean userLogOut(User user) {

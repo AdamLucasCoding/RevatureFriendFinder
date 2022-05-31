@@ -25,11 +25,11 @@ public class Message {
 	private String text;
 	
 	@ManyToOne
-    @JoinColumn(name ="activity_id", referencedColumnName = "id")
+    @JoinColumn(name ="activity_id", referencedColumnName = "a_id")
 	private Activity activity_id;
 	
 	@ManyToOne
-    @JoinColumn(name ="author_id", referencedColumnName = "id")
+    @JoinColumn(name ="author_id", referencedColumnName = "u_id")
 	private User author_id;
 	
 	@Column(name="created_date")
