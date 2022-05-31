@@ -82,3 +82,12 @@
 2022-05-25 14:29:25 INFO  revature.aspectes.LoggingAspect:37 - Result of this method invoking is: [Message [id=1, text=I play indor soccer, im planning to be there., activity_id=Activity [id=2, name=Indor soccer, type=Sports, location=Community Gym, dateTime=2022-10-10, createdBy=User [id=2, username=username2, pword=password2, email=email2], occupancyMax=5], author_id=User [id=1, username=username1, pword=password1, email=email1], timeStamp=2020-05-23], Message [id=2, text=Chess sound fun looking forward to learning, activity_id=Activity [id=3, name=Chess, type=Board Games, location=Community Center, dateTime=2022-10-10, createdBy=User [id=3, username=username3, pword=password3, email=email3], occupancyMax=5], author_id=User [id=2, username=username2, pword=password2, email=email2], timeStamp=2020-05-24], Message [id=3, text=Quik b-ball session, nice, activity_id=Activity [id=1, name=2 v 2 Basketball, type=Sports, location=Community Gym, dateTime=2022-10-10, createdBy=User [id=1, username=username1, pword=password1, email=email1], occupancyMax=5], author_id=User [id=3, username=username3, pword=password3, email=email3], timeStamp=2020-05-25]]
 2022-05-25 14:29:25 INFO  revature.aspectes.LoggingAspect:40 - End of Around Advice
 2022-05-25 14:29:25 INFO  revature.aspectes.LoggingAspect:25 - After advice for: [class com.revature.controllers.MessageController:allMessages]
+2022-05-28 15:40:58 INFO  revature.aspectes.LoggingAspect:19 - Before advice for: [class com.revature.controllers.UserController:createUser]
+2022-05-28 15:40:58 INFO  revature.aspectes.LoggingAspect:31 - Around advice for: [class com.revature.services.UserServiceImpl:createUser]
+2022-05-28 15:40:58 INFO  revature.aspectes.LoggingAspect:19 - Before advice for: [class com.revature.services.UserServiceImpl:createUser]
+2022-05-28 15:40:58 INFO  revature.aspectes.LoggingAspect:19 - Before advice for: [class com.sun.proxy.$Proxy122:save]
+2022-05-28 15:40:58 INFO  revature.aspectes.LoggingAspect:25 - After advice for: [class com.sun.proxy.$Proxy122:save]
+2022-05-28 15:40:58 INFO  revature.aspectes.LoggingAspect:25 - After advice for: [class com.revature.services.UserServiceImpl:createUser]
+2022-05-28 15:40:58 INFO  revature.aspectes.LoggingAspect:37 - Result of this method invoking is: true
+2022-05-28 15:40:58 INFO  revature.aspectes.LoggingAspect:40 - End of Around Advice
+2022-05-28 15:40:58 INFO  revature.aspectes.LoggingAspect:25 - After advice for: [class com.revature.controllers.UserController:createUser]
