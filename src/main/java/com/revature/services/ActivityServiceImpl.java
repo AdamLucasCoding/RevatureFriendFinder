@@ -22,8 +22,9 @@ public class ActivityServiceImpl implements ActivityService {
 	}
 
 	@Override
-	public Optional<Activity> findById(int id) {
-		return activityRepo.findById(id);
+	public Activity findById(int id) {
+		Optional<Activity> activity = activityRepo.findById(id);
+		return activity.isPresent() ? activity.get() : null;
 	}
 
 	@Override

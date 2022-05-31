@@ -8,7 +8,7 @@ public interface ActivityService {
 
 	boolean create(Activity activity);
 
-	Optional<Activity> findById(int id);
+	Activity findById(int id);
 
 	List<Activity> findAll();
 

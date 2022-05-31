@@ -38,8 +38,7 @@ public class ActivityController {
 	@ApiOperation(value = "Find activity by unique id", notes = "Provide an unique id to lookup a specific activity", response = Activity.class)
 	@GetMapping(path = "/{id}")
 	public @ResponseBody Activity findById(@PathVariable int id) {
-		Optional<Activity> activity = activityService.findById(id);
-		return activity.isPresent() ? activity.get() : null;
+		return activityService.findById(id);
 	}
 
 	@ApiOperation(value = "Find all activities")
