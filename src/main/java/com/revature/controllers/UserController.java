@@ -50,7 +50,10 @@ public class UserController {
 
 	@PostMapping(path = "/register")
 	public @ResponseBody User createUser(@RequestBody User user) {
-		String encodedPassword = encodePassword(user.getPword());
+		int strength = 10;
+		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(strength, new SecureRandom());
+		String encodedPassword = bCryptPasswordEncoder.encode(user.getPword());
+		user.setPword(encodedPassword);
 		return userService.createUser(user);
 	}
 
