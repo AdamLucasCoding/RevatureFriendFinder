@@ -21,7 +21,7 @@ public class MessageController {
 	private MessageService messageService;
 	
 	@PostMapping(path="/createmessage")
-	public @ResponseBody Message createMessage(@RequestBody Message message) {
+	public @ResponseBody boolean createMessage(@RequestBody Message message) {
 		System.out.println("@MessageController - createMessage: " + message.toString());
 		return messageService.createMessage(message);
 	}

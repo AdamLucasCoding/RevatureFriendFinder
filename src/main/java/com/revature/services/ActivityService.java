@@ -11,9 +11,9 @@ public interface ActivityService {
 
 	Activity getActivityById(int id);
 
-	Activity createActivity(Activity activity);
+	boolean createActivity(Activity activity);
 
-	Activity updateActivity(Activity activity);
+	boolean updateActivity(Activity activity);
 
 	boolean deteteActivity(Activity activity);
 

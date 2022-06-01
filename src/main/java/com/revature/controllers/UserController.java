@@ -49,10 +49,9 @@ public class UserController {
 	private JwtUtil jwtTokenUtil;
 
 	@PostMapping(path = "/register")
-	public @ResponseBody User createUser(@RequestBody User user) {
-		int strength = 10;
-		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(strength, new SecureRandom());
-		String encodedPassword = bCryptPasswordEncoder.encode(user.getPword());
+	public @ResponseBody boolean createUser(@RequestBody User user) {
+		String plainPassword = user.getPword();
+		String encodedPassword = encodePassword(plainPassword);
 		user.setPword(encodedPassword);
 		return userService.createUser(user);
 	}
@@ -113,7 +112,7 @@ public class UserController {
 	}
 
 	@PutMapping(path = "/user/update")
-	public @ResponseBody User updateUser(@RequestBody User user) {
+	public @ResponseBody boolean updateUser(@RequestBody User user) {
 		return userService.updateUser(user);
 	}
 

@@ -6,7 +6,7 @@ import com.revature.models.User;
 
 public interface UserService {
 	// put a new user -- returns the new user object
-	User createUser(User user);
+	boolean createUser(User user);
 	
 	// get user by ID
 	User getUserById(int id);
@@ -21,7 +21,7 @@ public interface UserService {
 	boolean userLogOut(User user);
 	
 	// update user -- returns updated user object
-	User updateUser(User user);
+	boolean updateUser(User user);
 
 	// delete user
 	boolean deleteUser(User user);
