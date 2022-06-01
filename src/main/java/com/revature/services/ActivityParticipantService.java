@@ -16,4 +16,6 @@ public interface ActivityParticipantService {
 
 	boolean deleteAp(ActivityParticipant ap);
 
+	List<ActivityParticipant> getAllAp();
+
 }

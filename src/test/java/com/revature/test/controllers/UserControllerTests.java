@@ -158,18 +158,18 @@ public class UserControllerTests {
 	
 	public void testGetById() throws Exception {
 		when(service.getUserById(1)).thenReturn(mockUser1);
-		RequestBuilder request = MockMvcRequestBuilders.get("/api/user/id?id=1");
+		RequestBuilder request = MockMvcRequestBuilders.get("/api/user/id");
 		MvcResult result = mockmvc.perform(request).andReturn();
 		assertEquals(om.writeValueAsString(mockUser1), result.getResponse().getContentAsString());
 	}
 
 	@Test
 	@Order(4)
-	@DisplayName("4. Get All Candies - Happy Path Scenerio Test")
+	@DisplayName("4. Get All Users - Happy Path Scenerio Test")
 	
 	public void testGetAll() throws Exception {
 		when(service.getAllUsers()).thenReturn(dummyDb);
-		RequestBuilder request = MockMvcRequestBuilders.get("/api/user/getall");
+		RequestBuilder request = MockMvcRequestBuilders.get("/api/user/users");
 		MvcResult result = mockmvc.perform(request).andReturn();
 		assertEquals(om.writeValueAsString(dummyDb), result.getResponse().getContentAsString());
 	}

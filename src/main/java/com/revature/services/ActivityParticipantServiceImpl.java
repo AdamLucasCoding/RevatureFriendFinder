@@ -11,7 +11,7 @@ import com.revature.repositories.ActivityParticipantRepository;
 
 @Service
 @Transactional
-public class ActivityParticipanterviceImpl implements ActivityParticipantService {
+public class ActivityParticipantServiceImpl implements ActivityParticipantService {
 
 	@Autowired
 	private ActivityParticipantRepository aprepo;
@@ -40,6 +40,11 @@ public class ActivityParticipanterviceImpl implements ActivityParticipantService
 	public boolean deleteAp(ActivityParticipant ap) {
 		aprepo.delete(ap);
 		return true;
+	}
+
+	@Override
+	public List<ActivityParticipant> getAllAp() {
+		return aprepo.findAll();
 	}
 
 }

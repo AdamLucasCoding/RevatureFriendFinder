@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.models.AuthenticationRequest;
 import com.revature.models.AuthenticationResponse;
+import com.revature.models.ClientMessage;
 import com.revature.models.User;
 import com.revature.services.MyUserDetailService;
 import com.revature.services.UserService;
@@ -55,7 +56,9 @@ public class UserController {
 		String plainPassword = user.getPword();
 		String encodedPassword = encodePassword(plainPassword);
 		user.setPword(encodedPassword);
-		return userService.createUser(user);
+		if(userService.createUser(user)) {
+			return 
+		}
 	}
 
 	@RequestMapping(value = "/user/authenticate", method = RequestMethod.POST)
@@ -101,11 +104,6 @@ public class UserController {
 	public @ResponseBody List<User> getAll() {
 		List<User> allUsers = userService.getAllUsers();
 		return allUsers;
-	}
-
-	@GetMapping(path = "/user/login")
-	public @ResponseBody User userLogIn(String username, String password) {
-		return null;
 	}
 
 	@GetMapping(path = "/user/logout")

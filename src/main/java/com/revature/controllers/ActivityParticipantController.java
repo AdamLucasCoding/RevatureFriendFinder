@@ -22,9 +22,15 @@ public class ActivityParticipantController {
 	@Autowired
 	private ActivityParticipantService apService;
 	
-	@PostMapping(path="/createap")
+	@PostMapping(path="/ap/create")
 	public @ResponseBody ActivityParticipant creatAp(@RequestBody ActivityParticipant ap) {
 		return apService.createAp(ap);
+	}
+	
+	@GetMapping(path="/ap/all")
+	public @ResponseBody List<ActivityParticipant> apGetAll() {
+		List<ActivityParticipant> allAps = apService.getAllAp();
+		return apService.getAllAp();
 	}
 	
 	@GetMapping(path="/ap/byactivity")
