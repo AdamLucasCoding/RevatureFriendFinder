@@ -39,6 +39,7 @@ public class UserController {
 	private UserService userService;
 
 	@Autowired
+	@Lazy
 	private MyUserDetailService userDetailService;
 
 	@Lazy
@@ -46,9 +47,10 @@ public class UserController {
 	private AuthenticationManager authenticationManager;
 
 	@Autowired
+	@Lazy
 	private JwtUtil jwtTokenUtil;
 
-	@PostMapping(path = "/register")
+	@PostMapping(path = "/user/register")
 	public @ResponseBody boolean createUser(@RequestBody User user) {
 		String plainPassword = user.getPword();
 		String encodedPassword = encodePassword(plainPassword);
@@ -56,7 +58,7 @@ public class UserController {
 		return userService.createUser(user);
 	}
 
-	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+	@RequestMapping(value = "/user/authenticate", method = RequestMethod.POST)
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest)
 			throws Exception {
 		try {
@@ -95,18 +97,18 @@ public class UserController {
 		return userService.getUserById(id);
 	}
 
-	@GetMapping(path = "/users")
+	@GetMapping(path = "/user/users")
 	public @ResponseBody List<User> getAll() {
 		List<User> allUsers = userService.getAllUsers();
 		return allUsers;
 	}
 
-	@GetMapping(path = "/login")
+	@GetMapping(path = "/user/login")
 	public @ResponseBody User userLogIn(String username, String password) {
 		return null;
 	}
 
-	@GetMapping(path = "/logout")
+	@GetMapping(path = "/user/logout")
 	public boolean userLogout(User user) {
 		return userService.userLogOut(user);
 	}
