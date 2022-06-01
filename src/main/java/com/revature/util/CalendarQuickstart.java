@@ -26,11 +26,11 @@ import com.google.api.services.calendar.model.Events;
 
 public class CalendarQuickstart {
 	 /** Application name. */
-    private static final String APPLICATION_NAME = "Google Calendar API Java Quickstart";
+    public static final String APPLICATION_NAME = "Google Calendar API Java Quickstart";
     /** Global instance of the JSON factory. */
-    private static final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
+    public static final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
     /** Directory to store authorization tokens for this application. */
-    private static final String TOKENS_DIRECTORY_PATH = "tokens";
+    public static final String TOKENS_DIRECTORY_PATH = "tokens";
 
     /**
      * Global instance of the scopes required by this quickstart.
@@ -45,7 +45,7 @@ public class CalendarQuickstart {
      * @return An authorized Credential object.
      * @throws IOException If the credentials.json file cannot be found.
      */
-    private static Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT) throws IOException {
+    public static Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT, final String user) throws IOException {
         // Load client secrets.
         InputStream in = CalendarQuickstart.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
         if (in == null) {
@@ -60,47 +60,17 @@ public class CalendarQuickstart {
                 .setAccessType("offline")
                 .build();
         LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(8888).build();
-        Credential credential = new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
+        Credential credential = new AuthorizationCodeInstalledApp(flow, receiver).authorize(user);
         //returns an authorized Credential object.
         return credential;
     }
     
-//  // Build a new authorized API client service.
-    public static Calendar APIStart() throws IOException, GeneralSecurityException {
+    // Build a new authorized API client service.
+    public static Calendar APIStart(String user) throws IOException, GeneralSecurityException {
     	final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
-    	Calendar service = new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
+    	Calendar service = new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT, user))
     			.setApplicationName(APPLICATION_NAME)
     			.build();
     	return service;
     }
-
-//    public static void main(String... args) throws IOException, GeneralSecurityException {
-//        // Build a new authorized API client service.
-//        final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
-//        Calendar service = new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
-//                .setApplicationName(APPLICATION_NAME)
-//                .build();
-//
-//        // List the next 10 events from the primary calendar.
-//        DateTime now = new DateTime(System.currentTimeMillis());
-//        Events events = service.events().list("primary")
-//                .setMaxResults(10)
-//                .setTimeMin(now)
-//                .setOrderBy("startTime")
-//                .setSingleEvents(true)
-//                .execute();
-//        List<Event> items = events.getItems();
-//        if (items.isEmpty()) {
-//            System.out.println("No upcoming events found.");
-//        } else {
-//            System.out.println("Upcoming events");
-//            for (Event event : items) {
-//                DateTime start = event.getStart().getDateTime();
-//                if (start == null) {
-//                    start = event.getStart().getDate();
-//                }
-//                System.out.printf("%s (%s)\n", event.getSummary(), start);
-//            }
-//        }
-//    }
 }

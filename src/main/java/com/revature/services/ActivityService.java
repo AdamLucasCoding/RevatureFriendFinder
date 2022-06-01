@@ -1,5 +1,7 @@
 package com.revature.services;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.List;
 
 import com.revature.models.Activity;
@@ -11,7 +13,7 @@ public interface ActivityService {
 
 	Activity getActivityById(int id);
 
-	Activity createActivity(Activity activity);
+	Activity createActivity(Activity activity) throws IOException, GeneralSecurityException;
 
 	Activity updateActivity(Activity activity);
 

@@ -1,6 +1,6 @@
 package com.revature.models;
 
-import java.time.LocalDate;
+
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.google.api.client.util.DateTime;
 
 import lombok.Data;
 
@@ -34,7 +36,7 @@ public class Activity {
 	private String location;
 	
 	@Column(name="created_date", nullable=false)
-	private LocalDate dateTime;
+	private DateTime dateTime;
 	
 	@ManyToOne
     @JoinColumn(name ="created_by", referencedColumnName = "u_id")
@@ -48,7 +50,7 @@ public class Activity {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Activity(String name, String type, String location, LocalDate dateTime, User createdBy, int occupancyMax) {
+	public Activity(String name, String type, String location, DateTime dateTime, User createdBy, int occupancyMax) {
 		super();
 		this.name = name;
 		this.type = type;
@@ -58,7 +60,7 @@ public class Activity {
 		this.occupancyMax = occupancyMax;
 	}
 
-	public Activity(int id, String name, String type, String location, LocalDate dateTime, User createdBy,
+	public Activity(int id, String name, String type, String location, DateTime dateTime, User createdBy,
 			int occupancyMax) {
 		super();
 		this.a_id = id;
@@ -108,11 +110,11 @@ public class Activity {
 		this.location = location;
 	}
 
-	public LocalDate getDateTime() {
+	public DateTime getDateTime() {
 		return dateTime;
 	}
 
-	public void setDateTime(LocalDate dateTime) {
+	public void setDateTime(DateTime dateTime) {
 		this.dateTime = dateTime;
 	}
 

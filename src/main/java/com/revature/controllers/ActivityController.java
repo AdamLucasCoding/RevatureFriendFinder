@@ -1,5 +1,7 @@
 package com.revature.controllers;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +25,7 @@ public class ActivityController {
 	private ActivityService activityService;
 	
 	@PostMapping(path="/createactivity")
-	public @ResponseBody Activity createActivity(@RequestBody Activity activity) {
+	public @ResponseBody Activity createActivity(@RequestBody Activity activity) throws IOException, GeneralSecurityException {
 		return activityService.createActivity(activity);
 	}
 	

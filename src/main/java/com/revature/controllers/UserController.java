@@ -10,6 +10,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,12 +25,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.models.ClientMessage;
 import com.revature.models.AuthenticationRequest;
 import com.revature.models.AuthenticationResponse;
 import com.revature.models.User;
 import com.revature.services.MyUserDetailService;
 import com.revature.services.UserService;
 import com.revature.util.JwtUtil;
+import com.revature.util.JwtAuthenticationEntryPoint;
+import static com.revature.util.ClientMessageUtil.*;
 
 @RestController
 @CrossOrigin
@@ -47,11 +52,30 @@ public class UserController {
 
 	@Autowired
 	private JwtUtil jwtTokenUtil;
+	
+	@Autowired
+	private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
 	@PostMapping(path = "/register")
-	public @ResponseBody User createUser(@RequestBody User user) {
-		String encodedPassword = encodePassword(user.getPword());
-		return userService.createUser(user);
+	public @ResponseBody ResponseEntity<?> createUser(@RequestBody User user) throws Exception {
+		HttpSecurity httpSecurity = null;
+				// We don't need CSRF for this example
+				httpSecurity.csrf().disable()
+						// dont authenticate this particular request
+						.authorizeRequests().antMatchers("/authenticate").permitAll().
+						// all other requests need to be authenticated
+						anyRequest().authenticated().and().
+						// make sure we use stateless session; session won't be used to
+						// store user's state.
+						exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
+						.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+		
+		if (userService.createUser(user)){
+			return createAuthenticationToken(new AuthenticationRequest(user.getUsername(), user.getPword()));
+		}else {
+			return null;
+		}
 	}
 
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
@@ -110,8 +134,8 @@ public class UserController {
 	}
 
 	@PutMapping(path = "/user/update")
-	public @ResponseBody User updateUser(@RequestBody User user) {
-		return userService.updateUser(user);
+	public @ResponseBody ClientMessage updateUser (@RequestBody User user) {
+		return userService.updateUser(user) ? UPDATE_SUCCESSFUL : UPDATE_FAILED;
 	}
 
 	@DeleteMapping(path = "/user/delete")

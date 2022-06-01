@@ -109,7 +109,7 @@ public class UserControllerTests {
 		
 		mockUserModification = mockUserCreation;
 		mockUserModification.setUsername("Pass");
-		mockUserModification.setPassword("Pass");
+		mockUserModification.setPword("Pass");
 		mockUserModification.setEmail("Pass");
 		
 		mockUserDeletion = new User(4, "Troll123", "badPassword", "troll@troll.com");
