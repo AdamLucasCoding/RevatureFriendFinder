@@ -65,19 +65,20 @@ public class ActivityControllerTests {
 	static void setUpBeforeClass() throws Exception {
 		System.out.println("setUpBeforeClass() :: building test objects...");
 
-        LocalDate dateTime = LocalDate.now();
+		LocalDate createdDate = LocalDate.now();
+		LocalDate activityDate = LocalDate.now();
 		
-		mockActivity1 = new Activity(1, "Fighting","Hobby", "Atlanta", dateTime, new User(1,"satyanadala1","password","satyanadala1@microsoft.com"), 10);
-		mockActivity2 = new Activity(2, "Cooking","Hobby", "Atlanta", dateTime, new User(2,"bineeshraghavan","password","bineeshraghavan@facebook.com"), 10);
+		mockActivity1 = new Activity(1, "Fighting","Hobby", "Atlanta", createdDate, activityDate, new User(1,"satyanadala1","password","satyanadala1@microsoft.com"), 10);
+		mockActivity2 = new Activity(2, "Cooking","Hobby", "Atlanta", createdDate, activityDate, new User(2,"bineeshraghavan","password","bineeshraghavan@facebook.com"), 10);
 		
 		
-		mockActivityCreation = new Activity("Gardening","Hobby", "Columbus", dateTime, new User(2,"bineeshraghavan","password","bineeshraghavan@facebook.com"), 5);
+		mockActivityCreation = new Activity("Gardening","Hobby", "Columbus", createdDate, activityDate, new User(2,"bineeshraghavan","password","bineeshraghavan@facebook.com"), 5);
 		
 		mockActivityModification = mockActivityCreation;
 		mockActivityModification.setLocation("Atlanta");
 		mockActivityModification.setOccupancyMax(12);
 		
-		mockActivityDeletion = new Activity(4, "Singing","Hobby", "Atlanta", dateTime, new User(2,"vidyabineesh","password","vidyabineesh@yahoo.com"), 10);
+		mockActivityDeletion = new Activity(4, "Singing","Hobby", "Atlanta", createdDate, activityDate,new User(2,"vidyabineesh","password","vidyabineesh@yahoo.com"), 10);
 		
 
 		dummyDb = new ArrayList<>();

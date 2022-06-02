@@ -47,4 +47,10 @@ public class ActivityParticipantServiceImpl implements ActivityParticipantServic
 		return aprepo.findAll();
 	}
 
+	@SuppressWarnings("deprecation")
+	@Override
+	public ActivityParticipant getApById(int id) {
+		return aprepo.getById(id);
+	}
+
 }

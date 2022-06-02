@@ -18,4 +18,6 @@ public interface ActivityParticipantService {
 
 	List<ActivityParticipant> getAllAp();
 
+	ActivityParticipant getApById(int id);
+
 }

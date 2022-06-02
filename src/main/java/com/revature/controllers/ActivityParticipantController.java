@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.models.ActivityParticipant;
+import com.revature.models.ClientMessage;
 import com.revature.services.ActivityParticipantService;
+import com.revature.util.ClientMessageUtil;
 
 @RestController
 @RequestMapping("/api")
@@ -23,14 +25,23 @@ public class ActivityParticipantController {
 	private ActivityParticipantService apService;
 	
 	@PostMapping(path="/ap/create")
-	public @ResponseBody ActivityParticipant creatAp(@RequestBody ActivityParticipant ap) {
-		return apService.createAp(ap);
+	public @ResponseBody ClientMessage creatAp(@RequestBody ActivityParticipant ap) {
+		if (apService.createAp(ap) != null) {
+			return ClientMessageUtil.CREATION_SUCCESSFUL;
+		} else {
+			return ClientMessageUtil.CREATION_FAILED;
+		}
 	}
 	
 	@GetMapping(path="/ap/all")
 	public @ResponseBody List<ActivityParticipant> apGetAll() {
 		List<ActivityParticipant> allAps = apService.getAllAp();
 		return apService.getAllAp();
+	}
+	
+	@GetMapping(path="/ap/id")
+	public @ResponseBody ActivityParticipant apById(@RequestBody int id) {
+		return apService.getApById(id);
 	}
 	
 	@GetMapping(path="/ap/byactivity")

@@ -57,7 +57,9 @@ public class UserController {
 		String encodedPassword = encodePassword(plainPassword);
 		user.setPword(encodedPassword);
 		if(userService.createUser(user)) {
-			return 
+			return true;
+		} else {
+			return false;
 		}
 	}
 

@@ -65,22 +65,23 @@ public class MessageControllerTest {
 static void setUpBeforeClass() throws Exception {
 	System.out.println("setUpBeforeClass() :: building test objects...");
 
-    LocalDate dateTime = LocalDate.now();
+    LocalDate createdDate = LocalDate.now();
+    LocalDate activityDate = LocalDate.now();
 	
 	User author = new User(1,"satyanadala1","password","satyanadala1@microsoft.com");
-	Activity activity = new Activity(1, "Singing","Hobby", "Atlanta", dateTime, author, 10);
+	Activity activity = new Activity(1, "Singing","Hobby", "Atlanta", createdDate, activityDate, author, 10);
 	
-	mockMessage1 = new Message(1,"I am going to sing",activity , author,dateTime);
-	mockMessage2 = new Message(2,"I am going to dance",activity , author,dateTime);
+	mockMessage1 = new Message(1,"I am going to sing",activity , author,createdDate);
+	mockMessage2 = new Message(2,"I am going to dance",activity , author,createdDate);
 	
 	
-	mockMessageCreation =new Message("I am going to cook",activity , author,dateTime );
+	mockMessageCreation =new Message("I am going to cook",activity , author,createdDate );
 	
 	mockMessageModification = mockMessageCreation;
 	mockMessageModification.setText("I am going to play game");
 	
 	
-	mockMessageDeletion = new Message("I am going to cook",activity , author,dateTime);
+	mockMessageDeletion = new Message("I am going to cook",activity , author,createdDate);
 	
 
 	dummyDb = new ArrayList<>();

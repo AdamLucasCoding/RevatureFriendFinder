@@ -33,7 +33,7 @@ public class Activity {
 	private String location;
 	
 	@Column(name="created_date", nullable=false)
-	private LocalDate dateTime;
+	private LocalDate createdDate;
 	
 	@Column(name="activity_date", nullable=false)
 	private LocalDate activityDate;
@@ -55,7 +55,7 @@ public class Activity {
 		this.name = name;
 		this.type = type;
 		this.location = location;
-		this.dateTime = dateTime;
+		this.createdDate = dateTime;
 		this.activityDate = activityDate;
 		this.created_by = createdBy;
 		this.occupancyMax = occupancyMax;
@@ -68,7 +68,7 @@ public class Activity {
 		this.name = name;
 		this.type = type;
 		this.location = location;
-		this.dateTime = dateTime;
+		this.createdDate = dateTime;
 		this.activityDate = activityDate;
 		this.created_by = createdBy;
 		this.occupancyMax = occupancyMax;
@@ -76,8 +76,8 @@ public class Activity {
 
 	@Override
 	public String toString() {
-		return "Activity [id=" + a_id + ", name=" + name + ", type=" + type + ", location=" + location + ", dateTime="
-				+ dateTime + ", activityDate=" + activityDate + ", createdBy=" + created_by + ", occupancyMax=" + occupancyMax + "]";
+		return "Activity [id=" + a_id + ", name=" + name + ", type=" + type + ", location=" + location + ", createdDate="
+				+ createdDate + ", activityDate=" + activityDate + ", createdBy=" + created_by + ", occupancyMax=" + occupancyMax + "]";
 	}
 
 	public int getId() {
@@ -113,11 +113,11 @@ public class Activity {
 	}
 
 	public LocalDate getDateTime() {
-		return dateTime;
+		return createdDate;
 	}
 
 	public void setDateTime(LocalDate dateTime) {
-		this.dateTime = dateTime;
+		this.createdDate = dateTime;
 	}
 	
 	public LocalDate getActivityDate() {
@@ -146,7 +146,7 @@ public class Activity {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(a_id, activityDate, created_by, dateTime, location, name, occupancyMax, type);
+		return Objects.hash(a_id, activityDate, created_by, createdDate, location, name, occupancyMax, type);
 	}
 
 	@Override
@@ -159,7 +159,7 @@ public class Activity {
 			return false;
 		Activity other = (Activity) obj;
 		return a_id == other.a_id && Objects.equals(activityDate, other.activityDate)
-				&& Objects.equals(created_by, other.created_by) && Objects.equals(dateTime, other.dateTime)
+				&& Objects.equals(created_by, other.created_by) && Objects.equals(createdDate, other.createdDate)
 				&& Objects.equals(location, other.location) && Objects.equals(name, other.name)
 				&& occupancyMax == other.occupancyMax && Objects.equals(type, other.type);
 	}
