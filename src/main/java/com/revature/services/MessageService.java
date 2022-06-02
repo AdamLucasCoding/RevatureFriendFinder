@@ -6,7 +6,9 @@ import com.revature.models.Message;
 
 public interface MessageService {
 	
-	Message createMessage(Message message);
+	boolean createMessage(Message message);
+	
+	boolean getMessageById(int id);
 
 	List<Message> getMessageByAuthor(int author_id);
 
@@ -14,4 +16,7 @@ public interface MessageService {
 
 	List<Message> getAllMessages();
 	
+	boolean updateMessage(Message message);
+	
+	boolean deleteMessage(Message message);
 }

@@ -22,18 +22,18 @@ public class ActivityController {
 	@Autowired
 	private ActivityService activityService;
 	
-	@PostMapping(path="/createactivity")
-	public @ResponseBody Activity createActivity(@RequestBody Activity activity) {
+	@PostMapping(path="/activity/create")
+	public @ResponseBody boolean createActivity(@RequestBody Activity activity) {
 		return activityService.createActivity(activity);
 	}
 	
-	@GetMapping(path="/activities")
+	@GetMapping(path="/activity/all")
 	public @ResponseBody List<Activity> getAll() {
 		List<Activity> allActivities = activityService.getAllActivities();
 		return allActivities;
 	}
 	
-	@GetMapping(path="/activity/id")
+	@GetMapping(path="/activity/{id}")
 	public @ResponseBody Activity getById(@RequestBody int id) {
 		return activityService.getActivityById(id);
 	}
@@ -55,7 +55,7 @@ public class ActivityController {
 	}
 	
 	@PutMapping(path="/activity/update")
-	public @ResponseBody Activity updateActivity(@RequestBody Activity activity) {
+	public @ResponseBody boolean updateActivity(@RequestBody Activity activity) {
 		return activityService.updateActivity(activity);
 	}
 	

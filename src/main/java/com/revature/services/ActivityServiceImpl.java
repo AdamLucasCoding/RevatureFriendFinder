@@ -30,13 +30,21 @@ public class ActivityServiceImpl implements ActivityService {
 	}
 
 	@Override
-	public Activity createActivity(Activity activity) {
-		return arepo.save(activity);
+	public boolean createActivity(Activity activity) {
+		if(arepo.save(activity) != null) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
-	public Activity updateActivity(Activity activity) {
-		return arepo.save(activity);
+	public boolean updateActivity(Activity activity) {
+		if(arepo.save(activity) != null) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override

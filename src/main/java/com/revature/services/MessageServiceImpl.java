@@ -17,8 +17,12 @@ public class MessageServiceImpl implements MessageService {
 	private MessageRepository mrepo;
 	
 	@Override
-	public Message createMessage(Message message) {
-		return mrepo.save(message);
+	public boolean createMessage(Message message) {
+		if(mrepo.save(message) != null) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
@@ -34,6 +38,30 @@ public class MessageServiceImpl implements MessageService {
 	@Override
 	public List<Message> getAllMessages() {
 		return mrepo.findAll();
+	}
+
+	@Override
+	public boolean getMessageById(int id) {
+		if(mrepo.findById(id).get() != null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean updateMessage(Message message) {
+		if(mrepo.save(message) != null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean deleteMessage(Message message) {
+		mrepo.delete(message);
+		return true;
 	}
 
 }

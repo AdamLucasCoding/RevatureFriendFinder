@@ -18,6 +18,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -63,6 +64,7 @@ public class UserControllerTests {
 	ObjectMapper om = new ObjectMapper();
 
 	@Autowired
+	@Lazy
 	UserController userController;
 
 	@Autowired
@@ -109,7 +111,7 @@ public class UserControllerTests {
 		
 		mockUserModification = mockUserCreation;
 		mockUserModification.setUsername("Pass");
-		mockUserModification.setPassword("Pass");
+		mockUserModification.setPword("Pass");
 		mockUserModification.setEmail("Pass");
 		
 		mockUserDeletion = new User(4, "Troll123", "badPassword", "troll@troll.com");

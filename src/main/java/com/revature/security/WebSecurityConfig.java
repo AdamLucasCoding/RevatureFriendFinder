@@ -3,6 +3,7 @@ package com.revature.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -25,12 +26,14 @@ import com.revature.util.JwtAuthenticationEntryPoint;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
+	@Lazy
 	private MyUserDetailService myUserDetailService;
 	
 	@Autowired
 	private JwtRequestFilter jwtRequestFilter;
 	
 	@Autowired
+	@Lazy
 	private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
 	@Autowired
@@ -52,7 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable()
-			.authorizeRequests().antMatchers("/api/activities", "/api/authenticate").permitAll()
+			.authorizeRequests().antMatchers("/api/*", "/api/activity/all", "/api/authenticate", "/api/register", "/api/logout").permitAll()
 			.anyRequest().authenticated()
 			.and().exceptionHandling()
 			.authenticationEntryPoint(jwtAuthenticationEntryPoint)
