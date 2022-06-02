@@ -4,22 +4,22 @@ values ('email1', '$2a$10$9adgrg8JkqMmED53eH4B7.AO6NqKFoqZNurDGjUL8Fj0WfQbL4jG.'
 	   ('email3', '$2a$10$o2pQwmoWZ4mfkNJxIoGSSO6o6vbNRHqhkgmZFNEor8Srdcbl15NPW', 'username3')
 ;
 
-insert into activities(name, type, location, created_date , created_by, occupancy_max)
-values ('2 v 2 Basketball', 'Sports', 'Community Gym', date '2022-10-10', 1, 5),
-	   ('Indor soccer', 'Sports', 'Community Gym', date '2022-10-10', 2, 5),
-	   ('Chess', 'Board Games', 'Community Center', date '2022-10-10', 3, 5),
-	   ('Fishing', 'Sports?', 'Irrigation Canal', date '2022-12-10', 1, 5),
-	   ('Cooking/Thai', 'Food', 'Community Center Kitchen', date '2022-12-10', 2, 5),
-	   ('Video Game1', 'Video Games', 'On Line', date '2022-12-10', 3, 5),
-	   ('Video Game2', 'Video Games', 'On Line', date '2022-11-10', 1, 5),
-	   ('X Box Live', 'Video Games', 'On Line', date '2022-11-10', 2, 5),
-	   ('PlayStaion', 'Video Games', 'On Line', date '2022-11-10', 3, 5),
-	   ('Cars and Coffee', 'Automotive', 'Walmart parking lot', date '2022-10-11', 1, 5),
-	   ('PingPong', 'Sports', 'Community Gym', date '2022-10-11', 2, 5),
-	   ('Tennis', 'Sports', 'Community Gym', date '2022-10-11', 3, 5),
-	   ('Wall climbing', 'Sports', 'Community Gym', date '2022-10-12', 1, 5),
-	   ('Baseball', 'Sports', 'Community Gym', date '2022-10-12', 2, 5),
-	   ('Chilli Eating', 'Sports', 'Community Gym', date '2022-10-12', 3, 5)
+insert into activities(name, type, location, created_date , activity_date, created_by, occupancy_max)
+values ('2 v 2 Basketball', 'Sports', 'Community Gym', date '2022-10-10',date '2022-10-10', 1, 5),
+	   ('Indor soccer', 'Sports', 'Community Gym', date '2022-10-10',date '2022-10-10', 2, 5),
+	   ('Chess', 'Board Games', 'Community Center', date '2022-10-10',date '2022-10-10', 3, 5),
+	   ('Fishing', 'Sports?', 'Irrigation Canal', date '2022-12-10',date '2022-10-10', 1, 5),
+	   ('Cooking/Thai', 'Food', 'Community Center Kitchen', date '2022-10-10',date '2022-12-10', 2, 5),
+	   ('Video Game1', 'Video Games', 'On Line', date '2022-10-10',date '2022-12-10', 3, 5),
+	   ('Video Game2', 'Video Games', 'On Line', date '2022-10-10',date '2022-11-10', 1, 5),
+	   ('X Box Live', 'Video Games', 'On Line', date '2022-10-10',date '2022-11-10', 2, 5),
+	   ('PlayStaion', 'Video Games', 'On Line',date '2022-10-10',date '2022-11-10', 3, 5),
+	   ('Cars and Coffee', 'Automotive', 'Walmart parking lot', date '2022-10-10',date '2022-10-11', 1, 5),
+	   ('PingPong', 'Sports', 'Community Gym', date '2022-10-10',date '2022-10-11', 2, 5),
+	   ('Tennis', 'Sports', 'Community Gym', date '2022-10-10',date '2022-10-11', 3, 5),
+	   ('Wall climbing', 'Sports', 'Community Gym', date '2022-10-10',date '2022-10-12', 1, 5),
+	   ('Baseball', 'Sports', 'Community Gym', date '2022-10-10',date '2022-10-12', 2, 5),
+	   ('Chilli Eating', 'Sports', 'Community Gym', date '2022-10-10',date '2022-10-12', 3, 5)
 ;
 
 
