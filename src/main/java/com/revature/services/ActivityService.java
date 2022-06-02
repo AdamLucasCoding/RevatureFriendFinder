@@ -1,19 +1,31 @@
 package com.revature.services;
 
 import java.util.List;
-import java.util.Optional;
+
 import com.revature.models.Activity;
 
 public interface ActivityService {
+	
+	// get all Activities
+	List<Activity> getAllActivities();
 
-	boolean create(Activity activity);
+	Activity getActivityById(int id);
 
-	Optional<Activity> findById(int id);
+	boolean createActivity(Activity activity);
 
-	List<Activity> findAll();
+	boolean updateActivity(Activity activity);
 
-	boolean update(Activity activity);
+	boolean deteteActivity(Activity activity);
 
-	void delete(Activity activity);
+	List<Activity> getActivitiesByType(String type);
+
+	List<Activity> getActivitiesByLocation(String location);
+
+	List<Activity> getActivitiesByCreator(int id);
+
+	// search by params
+	
+	// get activity by id
+	
 
 }

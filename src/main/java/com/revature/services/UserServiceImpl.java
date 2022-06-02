@@ -1,6 +1,7 @@
 package com.revature.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,24 +18,32 @@ public class UserServiceImpl implements UserService {
 	private UserRepository urepo;
 	
 	@Override
-	public User createUser(User user) {
-		return urepo.save(user);
+	public boolean createUser(User user) {
+		if(urepo.save(user) != null) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
-	public User updateUser(User user) {
-//		User target = urepo.findById(user.getId()).stream().findFirst().get();
-//		target.setUsername(user.getUsername());
-//		target.setPassword(user.getPassword());
-//		target.setEmail(user.getEmail());
-		return urepo.save(user);
+	public boolean updateUser(User user) {
+		if(urepo.save(user) != null) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
-	public User userLogIn(String username, String password) {
-		// TODO Auto-generated method stub
-		return null;
+	public User findUserByName(String username) {
+		Optional<User> user = urepo.findAll()
+				.stream()
+				.filter(u -> (u.getUsername().equals(username)))
+				.findFirst();
+		return user.isPresent() ? user.get() : null;
 	}
+	
 
 	@Override
 	public boolean userLogOut(User user) {
@@ -44,12 +53,14 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User getUserById(int id) {
-		return urepo.findById(id).stream().findFirst().get();
+		User tempUser = urepo.findById(id).get();
+		return tempUser;
 	}
 
 	@Override
 	public List<User> getAllUsers() {
-		return urepo.findAll();
+		List<User> allUsers = urepo.findAll();
+		return allUsers;
 	}
 
 	@Override

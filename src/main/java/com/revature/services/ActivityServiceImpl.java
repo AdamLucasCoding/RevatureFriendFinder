@@ -1,7 +1,7 @@
 package com.revature.services;
 
 import java.util.List;
-import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,31 +14,60 @@ import com.revature.repositories.ActivityRepository;
 public class ActivityServiceImpl implements ActivityService {
 
 	@Autowired
-	private ActivityRepository activityRepo;
-
+	private ActivityRepository arepo;
+	
 	@Override
-	public boolean create(Activity activity) {
-		return activityRepo.save(activity) != null;
+	public List<Activity> getAllActivities() {
+		List<Activity> allActivities = arepo.findAll();
+		return allActivities;
 	}
 
 	@Override
-	public Optional<Activity> findById(int id) {
-		return activityRepo.findById(id);
+	public Activity getActivityById(int id) {
+		Activity tempActivity = arepo.findById(id).get();
+		return tempActivity;
+		//return arepo.findById(id).stream().findFirst().get();
 	}
 
 	@Override
-	public List<Activity> findAll() {
-		return activityRepo.findAll();
+	public boolean createActivity(Activity activity) {
+		if(arepo.save(activity) != null) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
-	public boolean update(Activity activity) {
-		return activityRepo.save(activity) != null;
+	public boolean updateActivity(Activity activity) {
+		if(arepo.save(activity) != null) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
-	public void delete(Activity activity) {
-		activityRepo.delete(activity);
+	public boolean deteteActivity(Activity activity) {
+		arepo.delete(activity);
+		return true;
 	}
 
+	@Override
+	public List<Activity> getActivitiesByType(String type) {
+		List<Activity> activitiesByType = arepo.findByType(type);
+		return activitiesByType;
+	}
+
+	@Override
+	public List<Activity>  getActivitiesByLocation(String location) {
+		List<Activity> activitiesByLocation = arepo.findByLocation(location);
+		return activitiesByLocation;
+	}
+
+	@Override
+	public List<Activity>  getActivitiesByCreator(int id) {
+		List<Activity> activitiesByCreator = arepo.findByCreator(id);
+		return activitiesByCreator;
+	}
 }
