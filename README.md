@@ -1,4 +1,9 @@
 # RevatureFriendFinderBackend
+--note-- view raw for easier view. 
+
+We decided to use the Official Joke api as our chose api for this project. 
+The api servers to give the user a random joke at every page. 
+
 user stories:
 
 Users can sort the Activity board based on location
