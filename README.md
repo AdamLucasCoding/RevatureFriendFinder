@@ -9,6 +9,7 @@ user stories:
 Users can sort the Activity board based on location
 Users can sort the Activity board based on Activity
 Users can sort the Activity board based on Username
+Users can sort the Activity board based on activity type
 
     types of activity: video games, sports, cooking
 
@@ -25,6 +26,7 @@ users can create new events
 Users can edit their existing events
 users can delete their own events.
 
+// these are our stretch user stories. 
 users can add themselves to other people's events if positions are available.
 users can remove themselves from events.
 users can post messages attached to events.
