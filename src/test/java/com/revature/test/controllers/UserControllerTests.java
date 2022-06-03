@@ -107,12 +107,12 @@ public class UserControllerTests {
 		mockUser1 = new User(1, "Starbursts", "password", "email.com");
 		mockUser2 = new User(2, "Username", "myPassword", "myemail@email.com");
 		
-		mockUserCreation = new User("testfail", "testfail", "testfail");
+		mockUserCreation = new User(3, "testfail", "testfail", "testfail");
 		
 		mockUserModification = mockUserCreation;
-		mockUserModification.setUsername("Pass");
-		mockUserModification.setPword("Pass");
-		mockUserModification.setEmail("Pass");
+		mockUserModification.setUsername("uname");
+		mockUserModification.setPword("Passwo");
+		mockUserModification.setEmail("email@mail.com");
 		
 		mockUserDeletion = new User(4, "Troll123", "badPassword", "troll@troll.com");
 
@@ -138,7 +138,7 @@ public class UserControllerTests {
 	public void testCreateUser() throws Exception {
 		// id number of this creation should be 3
 		mockUserCreation.setId(3);
-		//tell Mockito the behavior that I want this method to act like in the mock environment
+		// tell Mockito the behavior that I want this method to act like in the mock environment
 		when(service.createUser(mockUserCreation)).thenReturn(true);
 		
 		//act

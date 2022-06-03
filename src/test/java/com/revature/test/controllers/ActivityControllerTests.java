@@ -117,7 +117,7 @@ public class ActivityControllerTests {
 	@DisplayName("3. Get Activity by ID - Happy Path Scenerio Test")
 	public void testGetById() throws Exception {
 		when(service.getActivityById(1)).thenReturn(mockActivity1);
-		RequestBuilder request = MockMvcRequestBuilders.get("/api/activity/1");
+		RequestBuilder request = MockMvcRequestBuilders.get("/api/activity?id=1");
 		MvcResult result = mockmvc.perform(request).andReturn();
 		assertThat(om.writeValueAsString(mockActivity1)).isEqualTo(result.getResponse().getContentAsString());
 	}
@@ -150,7 +150,7 @@ public class ActivityControllerTests {
 	@Order(6)
 	@DisplayName("6. Delete Activity - Happy Path Scenerio Test")
 	public void testDeleteActivity() throws Exception {
-		//when(service.delete(mockActivityDeletion)).thenReturn();
+		when(service.deteteActivity(mockActivityDeletion)).thenReturn(true);
 		RequestBuilder request = MockMvcRequestBuilders.delete("/api/activity/delete")
 				.accept(MediaType.APPLICATION_JSON_VALUE)
 				.content(om.writeValueAsString(mockActivityDeletion))
