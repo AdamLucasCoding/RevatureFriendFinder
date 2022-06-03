@@ -17,7 +17,7 @@ users can delete themselves
 users can log in.
 users can log out.
 
-users can Access a profile manager to view their infomation 
+users can Access a profile viewer to view their infomation 
 users can edit their personal information
 
 
