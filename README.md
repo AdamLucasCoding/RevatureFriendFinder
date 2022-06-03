@@ -7,9 +7,8 @@ The api servers to give the user a random joke at every page.
 user stories:
 
 Users can sort the Activity board based on location
-Users can sort the Activity board based on activity date
 Users can sort the Activity board based on Activity
-Users can sort the Activity board based on posting-user-Id
+Users can sort the Activity board based on Username
 
     types of activity: video games, sports, cooking
 
