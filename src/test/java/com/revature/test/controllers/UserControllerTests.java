@@ -158,7 +158,7 @@ public class UserControllerTests {
 	
 	public void testGetById() throws Exception {
 		when(service.getUserById(1)).thenReturn(mockUser1);
-		RequestBuilder request = MockMvcRequestBuilders.get("/api/user/id");
+		RequestBuilder request = MockMvcRequestBuilders.get("/api/user?id=1");
 		MvcResult result = mockmvc.perform(request).andReturn();
 		assertEquals(om.writeValueAsString(mockUser1), result.getResponse().getContentAsString());
 	}

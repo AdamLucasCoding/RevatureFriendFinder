@@ -33,7 +33,7 @@ public class ActivityController {
 		return allActivities;
 	}
 	
-	@GetMapping(path="/activity/{id}")
+	@GetMapping(path="/activity/id")
 	public @ResponseBody Activity getById(@RequestBody int id) {
 		return activityService.getActivityById(id);
 	}

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,6 +30,8 @@ import com.revature.models.ClientMessage;
 import com.revature.models.User;
 import com.revature.services.MyUserDetailService;
 import com.revature.services.UserService;
+
+import com.revature.util.ClientMessageUtil;
 import com.revature.util.JwtUtil;
 
 @RestController
@@ -52,15 +55,11 @@ public class UserController {
 	private JwtUtil jwtTokenUtil;
 
 	@PostMapping(path = "/user/register")
-	public @ResponseBody boolean createUser(@RequestBody User user) {
+	public @ResponseBody ClientMessage createUser(@RequestBody User user) {
 		String plainPassword = user.getPword();
 		String encodedPassword = encodePassword(plainPassword);
 		user.setPword(encodedPassword);
-		if(userService.createUser(user)) {
-			return true;
-		} else {
-			return false;
-		}
+		return userService.createUser(user) ? ClientMessageUtil.CREATION_SUCCESSFUL : ClientMessageUtil.CREATION_FAILED;  
 	}
 
 	@RequestMapping(value = "/user/authenticate", method = RequestMethod.POST)
@@ -97,8 +96,8 @@ public class UserController {
 		}
 	}
 
-	@GetMapping(path = "/user/id")
-	public @ResponseBody User getById(@RequestBody int id) {
+	@GetMapping(path = "/user")
+	public @ResponseBody User getById(@RequestParam(value = "id", name = "id") int id) {
 		return userService.getUserById(id);
 	}
 
@@ -114,12 +113,12 @@ public class UserController {
 	}
 
 	@PutMapping(path = "/user/update")
-	public @ResponseBody boolean updateUser(@RequestBody User user) {
-		return userService.updateUser(user);
+	public @ResponseBody ClientMessage updateUser(@RequestBody User user) {
+		return userService.updateUser(user) ? ClientMessageUtil.UPDATE_SUCCESSFUL : ClientMessageUtil.UPDATE_FAILED ;
 	}
 
 	@DeleteMapping(path = "/user/delete")
-	public @ResponseBody boolean deleteUser(@RequestBody User user) {
-		return userService.deleteUser(user);
+	public @ResponseBody ClientMessage deleteUser(@RequestBody User user) {
+		return userService.deleteUser(user) ? ClientMessageUtil.DELETION_SUCCESSFUL : ClientMessageUtil.DELETION_FAILED;
 	}
 }
