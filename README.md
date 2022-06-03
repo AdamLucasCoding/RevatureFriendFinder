@@ -24,4 +24,3 @@ users can delete their own events.
 users can add themselves to other people's events if positions are available.
 users can remove themselves from events.
 users can post messages attached to events.
-
