@@ -39,6 +39,7 @@ build/
 *.class
 
 # Log file
+bin/
 *.log
 
 # BlueJ files
