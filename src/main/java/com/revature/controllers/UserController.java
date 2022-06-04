@@ -56,9 +56,6 @@ public class UserController {
 
 	@PostMapping(path = "/user/register")
 	public @ResponseBody ClientMessage createUser(@RequestBody User user) {
-		String plainPassword = user.getPword();
-		String encodedPassword = encodePassword(plainPassword);
-		user.setPword(encodedPassword);
 		return userService.createUser(user) ? ClientMessageUtil.CREATION_SUCCESSFUL : ClientMessageUtil.CREATION_FAILED;  
 	}
 
@@ -76,14 +73,6 @@ public class UserController {
 		final String jwt = jwtTokenUtil.generateToken(userDetails);
 
 		return ResponseEntity.ok(new AuthenticationResponse(jwt));
-	}
-
-	private String encodePassword(String plainPassword) {
-
-		int strength = 10;
-		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(strength, new SecureRandom());
-		String encodedPassword = bCryptPasswordEncoder.encode(plainPassword);
-		return encodedPassword;
 	}
 	
 	private void authenticate(String username, String password) throws Exception {

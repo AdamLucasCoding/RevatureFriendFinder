@@ -76,41 +76,13 @@ public class UserControllerTests {
 	@MockBean
 	private UserService service;
 
-	/**
-	 * This method was used during debugging my controller test to make sure that 
-	 * the ObjectMapper was converting properly with my test objects
-	 * <p>
-	 * Note: <br>
-	 * ObjectMapper.getJsonFactory().createJsonParser(json) - Since 2.2; now can use ObjectMapper.getFactory().createParser(json)
-	 * </p>
-	 * @param json (the string literal of any User or ClientMessage object)
-	 * @return boolean (whether if valid JSON or not)
-	 * @author Azhya Knox
-	 **/
-	@SuppressWarnings("deprecation")
-	public boolean isValidJSON(final String json) {
-		boolean valid = false;
-		try {
-			final JsonParser parser = new ObjectMapper().getJsonFactory().createJsonParser(json);
-			while (parser.nextToken() != null) {
-			}
-			valid = true;
-		} catch (JsonParseException jpe) {
-			jpe.printStackTrace();
-		} catch (IOException ioe) {
-			ioe.printStackTrace();
-		}
-
-		return valid;
-	}
-
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		System.out.println("setUpBeforeClass() :: building test objects...");
 		mockUser1 = new User(1, "Starbursts", "password", "email.com");
 		mockUser2 = new User(2, "Username", "myPassword", "myemail@email.com");
 		
-		mockUserCreation = new User("testfail", "testfail", "testfail");
+		mockUserCreation = new User("johnDoe", "password", "myemail@email.com");
 		
 		mockUserModification = mockUserCreation;
 		mockUserModification.setUsername("uname");
@@ -149,6 +121,7 @@ public class UserControllerTests {
 				.accept(MediaType.APPLICATION_JSON_VALUE)
 				.content(om.writeValueAsString(mockUserCreation))
 				.contentType(MediaType.APPLICATION_JSON);
+		
 		MvcResult result = mockmvc.perform(request).andReturn();
 		//assert
 		assertThat(result.getResponse().getContentAsString()).isEqualTo(om.writeValueAsString(ClientMessageUtil.CREATION_SUCCESSFUL));
@@ -205,14 +178,5 @@ public class UserControllerTests {
 		MvcResult result = mockmvc.perform(request).andReturn();
 		assertEquals(om.writeValueAsString(ClientMessageUtil.DELETION_SUCCESSFUL),
 				result.getResponse().getContentAsString());
-	}
-	
-	@Test
-	@Order(7)
-	@DisplayName("7. Unneccessay/Unused Test")
-	@Disabled("Disabled until CreateUserTest is up!") 
-	// @Disabled will allow you to ignore this test while debugging other tests
-	public void unusedTest() {
-		return;
 	}
 }

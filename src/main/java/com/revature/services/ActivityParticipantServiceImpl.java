@@ -22,8 +22,7 @@ public class ActivityParticipantServiceImpl implements ActivityParticipantServic
 
 	@Override
 	public boolean createAp(ActivityParticipant ap) {
-		int pk = aprepo.save(ap).getId();
-		return (pk > 0) ? true : false;
+		return aprepo.save(ap) != null;
 	}
 
 	@Override
@@ -38,7 +37,7 @@ public class ActivityParticipantServiceImpl implements ActivityParticipantServic
 
 	@Override
 	public boolean updateAp(ActivityParticipant ap) {
-		return (aprepo.save(ap).getId() > 0) ? true : false;
+		return aprepo.save(ap) != null;
 	}
 
 	@Override

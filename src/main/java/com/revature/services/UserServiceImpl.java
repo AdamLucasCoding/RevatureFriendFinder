@@ -1,9 +1,11 @@
 package com.revature.services;
 
+import java.security.SecureRandom;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,20 +25,15 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean createUser(User user) {
-		User tempUser2 = urepo.save(user);
-		System.out.println("User received: " + user.toString());
-		System.out.println("User returned: " + tempUser2.toString());
-		return urepo.save(user) != null ? true : false;
-		
+		String plainPassword = user.getPword();
+		String encodedPassword = encodePassword(plainPassword);
+		user.setPword(encodedPassword);
+		return urepo.save(user) != null;		
 	}
 
 	@Override
 	public boolean updateUser(User user) {
-		if(urepo.save(user) != null) {
-			return true;
-		} else {
-			return false;
-		}
+		return urepo.save(user) != null;
 	}
 
 	@Override
@@ -74,5 +71,13 @@ public class UserServiceImpl implements UserService {
 	public boolean deleteUser(User user) {
 		urepo.delete(user);
 		return true;
+	}
+	
+	private String encodePassword(String plainPassword) {
+
+		int strength = 10;
+		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(strength, new SecureRandom());
+		String encodedPassword = bCryptPasswordEncoder.encode(plainPassword);
+		return encodedPassword;
 	}
 }

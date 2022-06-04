@@ -65,24 +65,6 @@ public class ActivityParticipantControllerTest {
 
 	@MockBean
 	private ActivityParticipantService apService;
-	
-
-	@SuppressWarnings("deprecation")
-	public boolean isValidJSON(final String json) {
-		boolean valid = false;
-		try {
-			final JsonParser parser = new ObjectMapper().getJsonFactory().createJsonParser(json);
-			while (parser.nextToken() != null) {
-			}
-			valid = true;
-		} catch (JsonParseException jpe) {
-			jpe.printStackTrace();
-		} catch (IOException ioe) {
-			ioe.printStackTrace();
-		}
-
-		return valid;
-	}
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -91,15 +73,15 @@ public class ActivityParticipantControllerTest {
 		LocalDate createdDate = LocalDate.now();
 		LocalDate activityDate = LocalDate.now();
 
-		User user1 = new User(1, "satyanadala1", "password", "satyanadala1@microsoft.com");
-		User user2 = new User(2, "satyanadala1", "password", "satyanadala1@microsoft.com");
-		User user3 = new User(3, "satyanadala1", "password", "satyanadala1@microsoft.com");
-		User user4 = new User(4, "satyanadala1", "password", "satyanadala1@microsoft.com");
+		User user1 = new User(1, "satyanadala", "password", "satyanadala1@microsoft.com");
+		User user2 = new User(2, "johnsmith", "password", "johnsmith@microsoft.com");
+		User user3 = new User(3, "johndoe", "password", "johndoe@microsoft.com");
+		User user4 = new User(4, "MarleneMcKenny", "password", "MarleneMcKenny@microsoft.com");
 
 		Activity activity1 = new Activity(1, "Singing", "Hobby", "Atlanta", createdDate, activityDate, user1, 10);
-		Activity activity2 = new Activity(2, "Singing", "Hobby", "Atlanta", createdDate, activityDate, user2, 10);
-		Activity activity3 = new Activity(3, "Singing", "Hobby", "Atlanta", createdDate, activityDate, user3, 10);
-		Activity activity4 = new Activity(4, "Singing", "Hobby", "Atlanta", createdDate, activityDate, user4, 10);
+		Activity activity2 = new Activity(2, "Playing Chess", "Hobby", "Atlanta", createdDate, activityDate, user2, 10);
+		Activity activity3 = new Activity(3, "Playing cards", "Hobby", "Atlanta", createdDate, activityDate, user3, 10);
+		Activity activity4 = new Activity(4, "Cooking Indian", "Hobby", "Atlanta", createdDate, activityDate, user4, 10);
 
 		mockAp1 = new ActivityParticipant(1, user1, activity1);
 		mockAp2 = new ActivityParticipant(2, user2, activity2);
@@ -110,7 +92,7 @@ public class ActivityParticipantControllerTest {
 		mockApModification.setParticipant(user4);
 		mockApModification.setActivity(activity4);
 
-		mockApDeletion = new ActivityParticipant(2, user2, activity2);
+		mockApDeletion = new ActivityParticipant(4, user2, activity2);
 
 		dummyDb = new ArrayList<>();
 		dummyDb.add(mockAp1);
@@ -185,7 +167,7 @@ public class ActivityParticipantControllerTest {
 				.content(om.writeValueAsString(mockApModification))
 				.contentType(MediaType.APPLICATION_JSON);
 		MvcResult result = mockmvc.perform(request).andReturn();
-		assertThat(om.writeValueAsString(ClientMessageUtil.UPDATE_SUCCESSFUL)).isEqualTo(result.getResponse().getContentAsString());
+		assertThat(result.getResponse().getContentAsString()).isEqualTo(om.writeValueAsString(ClientMessageUtil.UPDATE_SUCCESSFUL));
 	}
 	
 	@Test
@@ -198,20 +180,8 @@ public class ActivityParticipantControllerTest {
 				.content(om.writeValueAsString(mockApDeletion))
 				.contentType(MediaType.APPLICATION_JSON);
 		MvcResult result = mockmvc.perform(request).andReturn();
-		assertThat(om.writeValueAsString(ClientMessageUtil.DELETION_SUCCESSFUL)).isEqualTo(result.getResponse().getContentAsString());
+		assertThat(result.getResponse().getContentAsString()).isEqualTo(om.writeValueAsString(ClientMessageUtil.DELETION_SUCCESSFUL));
 		
 	}
-	
-	@Test
-	@Order(7)
-	@DisplayName("7. Unneccessay/Unused Test")
-	@Disabled("Disabled until CreateMessageTest is up!") 
-	// @Disabled will allow you to ignore this test while debugging other tests
-	public void unusedTest() {
-		return;
-	}
-	
-	
-	
 	
 }

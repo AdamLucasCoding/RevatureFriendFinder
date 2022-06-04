@@ -18,7 +18,7 @@ public class ActivityParticipant {
 	private int id;
 	
 	@ManyToOne
-    @JoinColumn(name ="u_id", referencedColumnName = "u_id")
+    @JoinColumn(name ="user_id", referencedColumnName = "u_id")
 	private User u_id;
 	
 	@ManyToOne
