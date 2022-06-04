@@ -41,7 +41,7 @@ import com.revature.services.ActivityParticipantService;
 import com.revature.util.ClientMessageUtil;
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(MessageController.class)
+@WebMvcTest(ActivityParticipantController.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ActivityParticipantControllerTest {
 
@@ -57,7 +57,6 @@ public class ActivityParticipantControllerTest {
 			.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);;
 
 	@Autowired
-	@Lazy
 	ActivityParticipantController apController;
 
 	@Autowired

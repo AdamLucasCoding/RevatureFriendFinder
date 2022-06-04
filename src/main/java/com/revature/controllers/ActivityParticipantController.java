@@ -3,6 +3,7 @@ package com.revature.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +24,7 @@ import com.revature.util.ClientMessageUtil;
 public class ActivityParticipantController {
 	
 	@Autowired
+	@Lazy
 	private ActivityParticipantService apService;
 	
 	@PostMapping(path="/ap/create")
