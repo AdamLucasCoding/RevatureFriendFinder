@@ -16,6 +16,10 @@ public class MessageServiceImpl implements MessageService {
 	@Autowired
 	private MessageRepository mrepo;
 	
+	public MessageServiceImpl(MessageRepository dao) {
+		this.mrepo = dao;
+	}
+
 	@Override
 	public boolean createMessage(Message message) {
 		if(mrepo.save(message) != null) {
@@ -41,12 +45,8 @@ public class MessageServiceImpl implements MessageService {
 	}
 
 	@Override
-	public boolean getMessageById(int id) {
-		if(mrepo.findById(id).get() != null) {
-			return true;
-		} else {
-			return false;
-		}
+	public Message getMessageById(int id) {
+		return mrepo.findById(id).stream().findFirst().get();
 	}
 
 	@Override

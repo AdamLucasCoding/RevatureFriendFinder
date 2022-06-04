@@ -65,8 +65,9 @@ public class ActivityControllerTests {
 	static void setUpBeforeClass() throws Exception {
 		System.out.println("setUpBeforeClass() :: building test objects...");
 
-		LocalDate createdDate = LocalDate.now();
-		LocalDate activityDate = LocalDate.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	    LocalDate createdDate = LocalDate.parse("2022-10-10", formatter);
+	    LocalDate activityDate = LocalDate.parse("2022-11-11", formatter);
 		
 		mockActivity1 = new Activity(1, "Fighting","Hobby", "Atlanta", createdDate, activityDate, new User(1,"satyanadala1","password","satyanadala1@microsoft.com"), 10);
 		mockActivity2 = new Activity(2, "Cooking","Hobby", "Atlanta", createdDate, activityDate, new User(2,"bineeshraghavan","password","bineeshraghavan@facebook.com"), 10);

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,21 +27,16 @@ public class ActivityParticipantController {
 	
 	@PostMapping(path="/ap/create")
 	public @ResponseBody ClientMessage creatAp(@RequestBody ActivityParticipant ap) {
-		if (apService.createAp(ap) != null) {
-			return ClientMessageUtil.CREATION_SUCCESSFUL;
-		} else {
-			return ClientMessageUtil.CREATION_FAILED;
-		}
+		return apService.createAp(ap) ? ClientMessageUtil.CREATION_SUCCESSFUL : ClientMessageUtil.CREATION_FAILED;
 	}
 	
 	@GetMapping(path="/ap/all")
 	public @ResponseBody List<ActivityParticipant> apGetAll() {
-		List<ActivityParticipant> allAps = apService.getAllAp();
 		return apService.getAllAp();
 	}
 	
-	@GetMapping(path="/ap/id")
-	public @ResponseBody ActivityParticipant apById(@RequestBody int id) {
+	@GetMapping(path="/ap")
+	public @ResponseBody ActivityParticipant apById(@RequestParam(value = "id", name = "id") int id) {
 		return apService.getApById(id);
 	}
 	
@@ -55,13 +51,13 @@ public class ActivityParticipantController {
 	}
 	
 	@PutMapping(path="/ap/update")
-	public @ResponseBody ActivityParticipant  updateAp(@RequestBody ActivityParticipant ap) {
-		return apService.updateAp(ap);
+	public @ResponseBody ClientMessage  updateAp(@RequestBody ActivityParticipant ap) {
+		return apService.updateAp(ap) ? ClientMessageUtil.UPDATE_SUCCESSFUL : ClientMessageUtil.UPDATE_FAILED;
 	}
 	
 	@DeleteMapping(path="/ap/delete")
-	public @ResponseBody boolean deleteAp(@RequestBody ActivityParticipant ap) {
-		return apService.deleteAp(ap);
+	public @ResponseBody ClientMessage deleteAp(@RequestBody ActivityParticipant ap) {
+		return apService.deleteAp(ap) ? ClientMessageUtil.DELETION_SUCCESSFUL : ClientMessageUtil.DELETION_FAILED;
 	}
 	
 }

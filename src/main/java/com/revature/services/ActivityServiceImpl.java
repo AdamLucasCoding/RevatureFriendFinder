@@ -16,6 +16,10 @@ public class ActivityServiceImpl implements ActivityService {
 	@Autowired
 	private ActivityRepository arepo;
 	
+	public ActivityServiceImpl(ActivityRepository dao) {
+		this.arepo = dao;
+	}
+
 	@Override
 	public List<Activity> getAllActivities() {
 		List<Activity> allActivities = arepo.findAll();

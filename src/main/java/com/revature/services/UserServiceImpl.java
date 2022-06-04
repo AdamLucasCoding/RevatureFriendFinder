@@ -17,10 +17,17 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserRepository urepo;
 	
+	public UserServiceImpl(UserRepository dao) {
+		this.urepo = dao;
+	}
+
 	@Override
 	public boolean createUser(User user) {
-		int pk = urepo.save(user).getId();
-		return (pk > 0) ? true : false;
+		User tempUser2 = urepo.save(user);
+		System.out.println("User received: " + user.toString());
+		System.out.println("User returned: " + tempUser2.toString());
+		return urepo.save(user) != null ? true : false;
+		
 	}
 
 	@Override
@@ -50,13 +57,16 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User getUserById(int id) {
+		System.out.println("Id received: " + id);
 		User tempUser = urepo.findById(id).get();
+		System.out.println("tempUser: " + tempUser.toString());
 		return tempUser;
 	}
 
 	@Override
 	public List<User> getAllUsers() {
 		List<User> allUsers = urepo.findAll();
+		
 		return allUsers;
 	}
 

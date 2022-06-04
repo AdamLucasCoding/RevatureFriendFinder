@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,9 +66,10 @@ public class MessageControllerTest {
 static void setUpBeforeClass() throws Exception {
 	System.out.println("setUpBeforeClass() :: building test objects...");
 
-    LocalDate createdDate = LocalDate.now();
-    LocalDate activityDate = LocalDate.now();
-	
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    LocalDate createdDate = LocalDate.parse("2022-10-10", formatter);
+    LocalDate activityDate = LocalDate.parse("2022-11-11", formatter);
+    
 	User author = new User(1,"satyanadala1","password","satyanadala1@microsoft.com");
 	Activity activity = new Activity(1, "Singing","Hobby", "Atlanta", createdDate, activityDate, author, 10);
 	
@@ -104,7 +106,7 @@ public void testCreateMessage() throws Exception {
 	when(service.createMessage(mockMessageCreation)).thenReturn(true);
 	
 	//act
-	RequestBuilder request = MockMvcRequestBuilders.post("/api/message/register")
+	RequestBuilder request = MockMvcRequestBuilders.post("/api/message/createmessage")
 			.accept(MediaType.APPLICATION_JSON_VALUE)
 			.content(om.writeValueAsString(mockMessageCreation))
 			.contentType(MediaType.APPLICATION_JSON);
@@ -116,8 +118,8 @@ public void testCreateMessage() throws Exception {
 @Order(3)
 @DisplayName("3. Get Message by ID - Happy Path Scenerio Test")
 public void testGetById() throws Exception {
-	when(service.getMessageById(1)).thenReturn(true);
-	RequestBuilder request = MockMvcRequestBuilders.get("/api/message/1");
+	when(service.getMessageById(1)).thenReturn(mockMessage1);
+	RequestBuilder request = MockMvcRequestBuilders.get("/api/message?id=1");
 	MvcResult result = mockmvc.perform(request).andReturn();
 	assertThat(om.writeValueAsString(mockMessage1)).isEqualTo(result.getResponse().getContentAsString());
 }
@@ -136,7 +138,7 @@ public void testGetAll() throws Exception {
 // @Disabled("Disabled until CreateMessageTest is up!")
 public void testUpdateMessage() throws Exception {
 	when(service.updateMessage(mockMessageModification)).thenReturn(true);
-	RequestBuilder request = MockMvcRequestBuilders.put("/api/message/")
+	RequestBuilder request = MockMvcRequestBuilders.put("/api/message/update")
 			.accept(MediaType.APPLICATION_JSON_VALUE)
 			.content(om.writeValueAsString(mockMessageModification))
 			.contentType(MediaType.APPLICATION_JSON);
@@ -148,7 +150,7 @@ public void testUpdateMessage() throws Exception {
 @DisplayName("6. Delete Message - Happy Path Scenerio Test")
 public void testDeleteMessage() throws Exception {
 	//when(service.delete(mockActivityDeletion)).thenReturn();
-	RequestBuilder request = MockMvcRequestBuilders.delete("/api/message/")
+	RequestBuilder request = MockMvcRequestBuilders.delete("/api/message/delete")
 			.accept(MediaType.APPLICATION_JSON_VALUE)
 			.content(om.writeValueAsString(mockMessageDeletion))
 			.contentType(MediaType.APPLICATION_JSON);

@@ -30,13 +30,14 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.revature.controllers.ActivityParticipantController;
 import com.revature.controllers.MessageController;
 import com.revature.models.Activity;
 import com.revature.models.ActivityParticipant;
 import com.revature.models.User;
 import com.revature.services.ActivityParticipantService;
-import com.revature.services.MessageService;
 import com.revature.util.ClientMessageUtil;
 
 @ExtendWith(SpringExtension.class)
@@ -51,7 +52,9 @@ public class ActivityParticipantControllerTest {
 	private static ActivityParticipant mockApDeletion;
 	private static List<ActivityParticipant> dummyDb;
 
-	ObjectMapper om = new ObjectMapper();
+	ObjectMapper om = new ObjectMapper()		
+			.registerModule(new JavaTimeModule())
+			.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);;
 
 	@Autowired
 	@Lazy
@@ -92,8 +95,6 @@ public class ActivityParticipantControllerTest {
 		User user2 = new User(2, "satyanadala1", "password", "satyanadala1@microsoft.com");
 		User user3 = new User(3, "satyanadala1", "password", "satyanadala1@microsoft.com");
 		User user4 = new User(4, "satyanadala1", "password", "satyanadala1@microsoft.com");
-		User user5 = new User(5, "satyanadala1", "password", "satyanadala1@microsoft.com");
-		User user6 = new User(6, "satyanadala1", "password", "satyanadala1@microsoft.com");
 
 		Activity activity1 = new Activity(1, "Singing", "Hobby", "Atlanta", createdDate, activityDate, user1, 10);
 		Activity activity2 = new Activity(2, "Singing", "Hobby", "Atlanta", createdDate, activityDate, user2, 10);
@@ -128,22 +129,14 @@ public class ActivityParticipantControllerTest {
 	@DisplayName("2. Create ActivityParticipant - Happy Path Scenerio Test")
 	public void testCreateAp() throws Exception {
 		
-		LocalDate createdDate = LocalDate.now();
-		LocalDate activityDate = LocalDate.now();
-		
-		User user2 = new User(2, "satyanadala1", "password", "satyanadala1@microsoft.com");
-		Activity activity2 = new Activity(2, "Singing", "Hobby", "Atlanta", createdDate, activityDate, user2, 10);
-
-
-		
 		// Id for created Ap should be 3
 		mockApCreation.setId(3);
 		
 		//tell Mockito the behavior that I want this method to act like in the mock environment
-		when(apService.createAp(mockApCreation)).thenReturn(new ActivityParticipant(3, user2, activity2));
+		when(apService.createAp(mockApCreation)).thenReturn(true);
 		
 		//act
-		RequestBuilder request = MockMvcRequestBuilders.post("/api/ap/register")
+		RequestBuilder request = MockMvcRequestBuilders.post("/api/ap/create")
 				.accept(MediaType.APPLICATION_JSON_VALUE)
 				.content(om.writeValueAsString(mockApCreation))
 				.contentType(MediaType.APPLICATION_JSON);
@@ -158,7 +151,7 @@ public class ActivityParticipantControllerTest {
 	@DisplayName("3. Get ActivityParticipant by ID - Happy Path Scenerio Test")
 	public void testGetById() throws Exception {
 		when(apService.getApById(1)).thenReturn(mockAp1);
-		RequestBuilder request = MockMvcRequestBuilders.get("/api/ap/id");
+		RequestBuilder request = MockMvcRequestBuilders.get("/api/ap?id=1");
 		MvcResult result = mockmvc.perform(request).andReturn();
 		assertThat(om.writeValueAsString(mockAp1)).isEqualTo(result.getResponse().getContentAsString());
 	}
@@ -186,7 +179,7 @@ public class ActivityParticipantControllerTest {
 
 		mockAp2 = new ActivityParticipant(2, user4, activity4);
 		
-		when(apService.updateAp(mockApModification)).thenReturn(new ActivityParticipant(1, user4, activity4));
+		when(apService.updateAp(mockApModification)).thenReturn(true);
 		RequestBuilder request = MockMvcRequestBuilders.put("/api/ap/update")
 				.accept(MediaType.APPLICATION_JSON_VALUE)
 				.content(om.writeValueAsString(mockApModification))
@@ -199,7 +192,7 @@ public class ActivityParticipantControllerTest {
 	@Order(6)
 	@DisplayName("6. Delete Message - Happy Path Scenerio Test")
 	public void testDeleteMessage() throws Exception {
-		//when(service.delete(mockActivityDeletion)).thenReturn();
+		when(apService.deleteAp(mockApDeletion)).thenReturn(true);
 		RequestBuilder request = MockMvcRequestBuilders.delete("/api/ap/delete")
 				.accept(MediaType.APPLICATION_JSON_VALUE)
 				.content(om.writeValueAsString(mockApDeletion))

@@ -16,9 +16,14 @@ public class ActivityParticipantServiceImpl implements ActivityParticipantServic
 	@Autowired
 	private ActivityParticipantRepository aprepo;
 	
+	public ActivityParticipantServiceImpl(ActivityParticipantRepository dao) {
+		this.aprepo = dao;
+	}
+
 	@Override
-	public ActivityParticipant createAp(ActivityParticipant ap) {
-		return aprepo.save(ap);
+	public boolean createAp(ActivityParticipant ap) {
+		int pk = aprepo.save(ap).getId();
+		return (pk > 0) ? true : false;
 	}
 
 	@Override
@@ -32,8 +37,8 @@ public class ActivityParticipantServiceImpl implements ActivityParticipantServic
 	}
 
 	@Override
-	public ActivityParticipant updateAp(ActivityParticipant ap) {
-		return aprepo.save(ap);
+	public boolean updateAp(ActivityParticipant ap) {
+		return (aprepo.save(ap).getId() > 0) ? true : false;
 	}
 
 	@Override
@@ -47,10 +52,10 @@ public class ActivityParticipantServiceImpl implements ActivityParticipantServic
 		return aprepo.findAll();
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public ActivityParticipant getApById(int id) {
-		return aprepo.getById(id);
+		ActivityParticipant tempAp = aprepo.findById(id).get();
+		return tempAp;
 	}
 
 }

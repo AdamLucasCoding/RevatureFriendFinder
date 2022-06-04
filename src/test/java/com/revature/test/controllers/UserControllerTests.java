@@ -29,6 +29,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.revature.controllers.UserController;
 import com.revature.models.User;
 import com.revature.services.UserService;
@@ -61,10 +63,11 @@ public class UserControllerTests {
 	private static User mockUserDeletion;
 	private static List<User> dummyDb;
 
-	ObjectMapper om = new ObjectMapper();
+	ObjectMapper om = new ObjectMapper()
+			.registerModule(new JavaTimeModule())
+			.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);;
 
 	@Autowired
-	@Lazy
 	UserController userController;
 
 	@Autowired
@@ -107,7 +110,7 @@ public class UserControllerTests {
 		mockUser1 = new User(1, "Starbursts", "password", "email.com");
 		mockUser2 = new User(2, "Username", "myPassword", "myemail@email.com");
 		
-		mockUserCreation = new User(3, "testfail", "testfail", "testfail");
+		mockUserCreation = new User("testfail", "testfail", "testfail");
 		
 		mockUserModification = mockUserCreation;
 		mockUserModification.setUsername("uname");
@@ -148,8 +151,7 @@ public class UserControllerTests {
 				.contentType(MediaType.APPLICATION_JSON);
 		MvcResult result = mockmvc.perform(request).andReturn();
 		//assert
-		assertEquals(om.writeValueAsString(ClientMessageUtil.CREATION_SUCCESSFUL),
-				result.getResponse().getContentAsString());
+		assertThat(result.getResponse().getContentAsString()).isEqualTo(om.writeValueAsString(ClientMessageUtil.CREATION_SUCCESSFUL));
 	}
 
 	@Test
