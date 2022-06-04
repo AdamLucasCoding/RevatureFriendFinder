@@ -120,7 +120,7 @@ public class ActivityControllerTests {
 		when(service.getActivityById(1)).thenReturn(mockActivity1);
 		RequestBuilder request = MockMvcRequestBuilders.get("/api/activity?id=1");
 		MvcResult result = mockmvc.perform(request).andReturn();
-		assertThat(om.writeValueAsString(mockActivity1)).isEqualTo(result.getResponse().getContentAsString());
+		assertThat(result.getResponse().getContentAsString()).isEqualTo(om.writeValueAsString(mockActivity1));
 	}
 
 	@Test
@@ -160,16 +160,6 @@ public class ActivityControllerTests {
 		assertThat(om.writeValueAsString(ClientMessageUtil.DELETION_SUCCESSFUL)).isEqualTo(result.getResponse().getContentAsString());
 		
 	}
-	
-	@Test
-	@Order(7)
-	@DisplayName("7. Unneccessay/Unused Test")
-	@Disabled("Disabled until CreateActivityTest is up!") 
-	// @Disabled will allow you to ignore this test while debugging other tests
-	public void unusedTest() {
-		return;
-	}
-		
 		
 }
 	
