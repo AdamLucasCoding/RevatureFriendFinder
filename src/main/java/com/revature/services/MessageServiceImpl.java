@@ -22,11 +22,7 @@ public class MessageServiceImpl implements MessageService {
 
 	@Override
 	public boolean createMessage(Message message) {
-		if(mrepo.save(message) != null) {
-			return true;
-		} else {
-			return false;
-		}
+		return mrepo.save(message) != null;
 	}
 
 	@Override
@@ -51,11 +47,7 @@ public class MessageServiceImpl implements MessageService {
 
 	@Override
 	public boolean updateMessage(Message message) {
-		if(mrepo.save(message) != null) {
-			return true;
-		} else {
-			return false;
-		}
+		return mrepo.save(message) != null;
 	}
 
 	@Override
