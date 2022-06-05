@@ -9,11 +9,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.models.Activity;
+import com.revature.models.ClientMessage;
 import com.revature.services.ActivityService;
+import com.revature.util.ClientMessageUtil;
 
 @RestController
 @RequestMapping("/api")
@@ -23,8 +26,8 @@ public class ActivityController {
 	private ActivityService activityService;
 	
 	@PostMapping(path="/activity/create")
-	public @ResponseBody boolean createActivity(@RequestBody Activity activity) {
-		return activityService.createActivity(activity);
+	public @ResponseBody ClientMessage createActivity(@RequestBody Activity activity) {
+		return activityService.createActivity(activity) ? ClientMessageUtil.CREATION_SUCCESSFUL : ClientMessageUtil.CREATION_FAILED;
 	}
 	
 	@GetMapping(path="/activity/all")
@@ -33,8 +36,8 @@ public class ActivityController {
 		return allActivities;
 	}
 	
-	@GetMapping(path="/activity/{id}")
-	public @ResponseBody Activity getById(@RequestBody int id) {
+	@GetMapping(path="/activity")
+	public @ResponseBody Activity getById(@RequestParam(value = "id", name = "id") int id) {
 		return activityService.getActivityById(id);
 	}
 	
@@ -55,13 +58,13 @@ public class ActivityController {
 	}
 	
 	@PutMapping(path="/activity/update")
-	public @ResponseBody boolean updateActivity(@RequestBody Activity activity) {
-		return activityService.updateActivity(activity);
+	public @ResponseBody ClientMessage updateActivity(@RequestBody Activity activity) {
+		return activityService.updateActivity(activity) ? ClientMessageUtil.UPDATE_SUCCESSFUL : ClientMessageUtil.UPDATE_FAILED;
 	}
 	
 	@DeleteMapping(path="/activity/delete")
-	public @ResponseBody boolean deleteUser(@RequestBody Activity activity) {
-		return activityService.deteteActivity(activity);
+	public @ResponseBody ClientMessage deleteUser(@RequestBody Activity activity) {
+		return activityService.deteteActivity(activity) ? ClientMessageUtil.DELETION_SUCCESSFUL : ClientMessageUtil.DELETION_FAILED;
 	}
 
 }

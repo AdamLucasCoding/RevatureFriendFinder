@@ -11,14 +11,18 @@ import com.revature.repositories.ActivityParticipantRepository;
 
 @Service
 @Transactional
-public class ActivityParticipanterviceImpl implements ActivityParticipantService {
+public class ActivityParticipantServiceImpl implements ActivityParticipantService {
 
 	@Autowired
 	private ActivityParticipantRepository aprepo;
 	
+	public ActivityParticipantServiceImpl(ActivityParticipantRepository dao) {
+		this.aprepo = dao;
+	}
+
 	@Override
-	public ActivityParticipant createAp(ActivityParticipant ap) {
-		return aprepo.save(ap);
+	public boolean createAp(ActivityParticipant ap) {
+		return aprepo.save(ap) != null;
 	}
 
 	@Override
@@ -32,14 +36,25 @@ public class ActivityParticipanterviceImpl implements ActivityParticipantService
 	}
 
 	@Override
-	public ActivityParticipant updateAp(ActivityParticipant ap) {
-		return aprepo.save(ap);
+	public boolean updateAp(ActivityParticipant ap) {
+		return aprepo.save(ap) != null;
 	}
 
 	@Override
 	public boolean deleteAp(ActivityParticipant ap) {
 		aprepo.delete(ap);
 		return true;
+	}
+
+	@Override
+	public List<ActivityParticipant> getAllAp() {
+		return aprepo.findAll();
+	}
+
+	@Override
+	public ActivityParticipant getApById(int id) {
+		ActivityParticipant tempAp = aprepo.findById(id).get();
+		return tempAp;
 	}
 
 }

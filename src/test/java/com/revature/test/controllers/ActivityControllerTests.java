@@ -65,19 +65,21 @@ public class ActivityControllerTests {
 	static void setUpBeforeClass() throws Exception {
 		System.out.println("setUpBeforeClass() :: building test objects...");
 
-        LocalDate dateTime = LocalDate.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	    LocalDate createdDate = LocalDate.parse("2022-10-10", formatter);
+	    LocalDate activityDate = LocalDate.parse("2022-11-11", formatter);
 		
-		mockActivity1 = new Activity(1, "Fighting","Hobby", "Atlanta", dateTime, new User(1,"satyanadala1","password","satyanadala1@microsoft.com"), 10);
-		mockActivity2 = new Activity(2, "Cooking","Hobby", "Atlanta", dateTime, new User(2,"bineeshraghavan","password","bineeshraghavan@facebook.com"), 10);
+		mockActivity1 = new Activity(1, "Fighting","Hobby", "Atlanta", createdDate, activityDate, new User(1,"satyanadala1","password","satyanadala1@microsoft.com"), 10);
+		mockActivity2 = new Activity(2, "Cooking","Hobby", "Atlanta", createdDate, activityDate, new User(2,"bineeshraghavan","password","bineeshraghavan@facebook.com"), 10);
 		
 		
-		mockActivityCreation = new Activity("Gardening","Hobby", "Columbus", dateTime, new User(2,"bineeshraghavan","password","bineeshraghavan@facebook.com"), 5);
+		mockActivityCreation = new Activity("Gardening","Hobby", "Columbus", createdDate, activityDate, new User(2,"bineeshraghavan","password","bineeshraghavan@facebook.com"), 5);
 		
 		mockActivityModification = mockActivityCreation;
 		mockActivityModification.setLocation("Atlanta");
 		mockActivityModification.setOccupancyMax(12);
 		
-		mockActivityDeletion = new Activity(4, "Singing","Hobby", "Atlanta", dateTime, new User(2,"vidyabineesh","password","vidyabineesh@yahoo.com"), 10);
+		mockActivityDeletion = new Activity(4, "Singing","Hobby", "Atlanta", createdDate, activityDate,new User(2,"vidyabineesh","password","vidyabineesh@yahoo.com"), 10);
 		
 
 		dummyDb = new ArrayList<>();
@@ -116,9 +118,9 @@ public class ActivityControllerTests {
 	@DisplayName("3. Get Activity by ID - Happy Path Scenerio Test")
 	public void testGetById() throws Exception {
 		when(service.getActivityById(1)).thenReturn(mockActivity1);
-		RequestBuilder request = MockMvcRequestBuilders.get("/api/activity/1");
+		RequestBuilder request = MockMvcRequestBuilders.get("/api/activity?id=1");
 		MvcResult result = mockmvc.perform(request).andReturn();
-		assertThat(om.writeValueAsString(mockActivity1)).isEqualTo(result.getResponse().getContentAsString());
+		assertThat(result.getResponse().getContentAsString()).isEqualTo(om.writeValueAsString(mockActivity1));
 	}
 
 	@Test
@@ -149,7 +151,7 @@ public class ActivityControllerTests {
 	@Order(6)
 	@DisplayName("6. Delete Activity - Happy Path Scenerio Test")
 	public void testDeleteActivity() throws Exception {
-		//when(service.delete(mockActivityDeletion)).thenReturn();
+		when(service.deteteActivity(mockActivityDeletion)).thenReturn(true);
 		RequestBuilder request = MockMvcRequestBuilders.delete("/api/activity/delete")
 				.accept(MediaType.APPLICATION_JSON_VALUE)
 				.content(om.writeValueAsString(mockActivityDeletion))
@@ -158,16 +160,6 @@ public class ActivityControllerTests {
 		assertThat(om.writeValueAsString(ClientMessageUtil.DELETION_SUCCESSFUL)).isEqualTo(result.getResponse().getContentAsString());
 		
 	}
-	
-	@Test
-	@Order(7)
-	@DisplayName("7. Unneccessay/Unused Test")
-	@Disabled("Disabled until CreateActivityTest is up!") 
-	// @Disabled will allow you to ignore this test while debugging other tests
-	public void unusedTest() {
-		return;
-	}
-		
 		
 }
 	

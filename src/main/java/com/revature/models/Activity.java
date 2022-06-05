@@ -15,7 +15,6 @@ import javax.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Data
 @Table(name="activities")
 public class Activity {
 
@@ -34,7 +33,10 @@ public class Activity {
 	private String location;
 	
 	@Column(name="created_date", nullable=false)
-	private LocalDate dateTime;
+	private LocalDate createdDate;
+	
+	@Column(name="activity_date", nullable=false)
+	private LocalDate activityDate;
 	
 	@ManyToOne
     @JoinColumn(name ="created_by", referencedColumnName = "u_id")
@@ -48,32 +50,34 @@ public class Activity {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Activity(String name, String type, String location, LocalDate dateTime, User createdBy, int occupancyMax) {
+	public Activity(String name, String type, String location, LocalDate dateTime, LocalDate activityDate, User createdBy, int occupancyMax) {
 		super();
 		this.name = name;
 		this.type = type;
 		this.location = location;
-		this.dateTime = dateTime;
+		this.createdDate = dateTime;
+		this.activityDate = activityDate;
 		this.created_by = createdBy;
 		this.occupancyMax = occupancyMax;
 	}
 
-	public Activity(int id, String name, String type, String location, LocalDate dateTime, User createdBy,
+	public Activity(int id, String name, String type, String location, LocalDate dateTime, LocalDate activityDate, User createdBy,
 			int occupancyMax) {
 		super();
 		this.a_id = id;
 		this.name = name;
 		this.type = type;
 		this.location = location;
-		this.dateTime = dateTime;
+		this.createdDate = dateTime;
+		this.activityDate = activityDate;
 		this.created_by = createdBy;
 		this.occupancyMax = occupancyMax;
 	}
 
 	@Override
 	public String toString() {
-		return "Activity [id=" + a_id + ", name=" + name + ", type=" + type + ", location=" + location + ", dateTime="
-				+ dateTime + ", createdBy=" + created_by + ", occupancyMax=" + occupancyMax + "]";
+		return "Activity [id=" + a_id + ", name=" + name + ", type=" + type + ", location=" + location + ", createdDate="
+				+ createdDate + ", activityDate=" + activityDate + ", createdBy=" + created_by + ", occupancyMax=" + occupancyMax + "]";
 	}
 
 	public int getId() {
@@ -109,11 +113,19 @@ public class Activity {
 	}
 
 	public LocalDate getDateTime() {
-		return dateTime;
+		return createdDate;
 	}
 
 	public void setDateTime(LocalDate dateTime) {
-		this.dateTime = dateTime;
+		this.createdDate = dateTime;
+	}
+	
+	public LocalDate getActivityDate() {
+		return activityDate;
+	}
+	
+	public void setActivityDate(LocalDate activityDate) {
+		this.activityDate = activityDate;
 	}
 
 	public User getCreated_by() {
@@ -134,7 +146,7 @@ public class Activity {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(created_by, dateTime, a_id, location, name, occupancyMax, type);
+		return Objects.hash(a_id, activityDate, created_by, createdDate, location, name, occupancyMax, type);
 	}
 
 	@Override
@@ -146,10 +158,13 @@ public class Activity {
 		if (getClass() != obj.getClass())
 			return false;
 		Activity other = (Activity) obj;
-		return Objects.equals(created_by, other.created_by) && Objects.equals(dateTime, other.dateTime)
-				&& a_id == other.a_id && Objects.equals(location, other.location) && Objects.equals(name, other.name)
+		return a_id == other.a_id && Objects.equals(activityDate, other.activityDate)
+				&& Objects.equals(created_by, other.created_by) && Objects.equals(createdDate, other.createdDate)
+				&& Objects.equals(location, other.location) && Objects.equals(name, other.name)
 				&& occupancyMax == other.occupancyMax && Objects.equals(type, other.type);
 	}
+
+	
 	
 	
 	
