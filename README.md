@@ -10,6 +10,9 @@ Users can sort the Activity board based on location
 Users can sort the Activity board based on Activity
 Users can sort the Activity board based on Username
 Users can sort the Activity board based on activity type
+Users can sort the Activity board based on activity Id
+Users can sort the Activity board based on activity creation date
+Users can sort the Activity board based on activity start date
 
     types of activity: video games, sports, cooking
 
