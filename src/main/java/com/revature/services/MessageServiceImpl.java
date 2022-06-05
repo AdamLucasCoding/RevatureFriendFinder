@@ -1,6 +1,7 @@
 package com.revature.services;
 
 import java.util.List;
+import java.util.stream.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,7 +43,7 @@ public class MessageServiceImpl implements MessageService {
 
 	@Override
 	public Message getMessageById(int id) {
-		return mrepo.findById(id).stream().findFirst().get();
+		return mrepo.findById(id).get();
 	}
 
 	@Override
