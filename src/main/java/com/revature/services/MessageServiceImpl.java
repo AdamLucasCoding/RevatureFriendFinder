@@ -3,14 +3,14 @@ package com.revature.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.models.Message;
 import com.revature.repositories.MessageRepository;
 
-@RestController
-@RequestMapping("/api")
+@Service
+@Transactional
 public class MessageServiceImpl implements MessageService {
 
 	@Autowired
@@ -22,11 +22,7 @@ public class MessageServiceImpl implements MessageService {
 
 	@Override
 	public boolean createMessage(Message message) {
-		if(mrepo.save(message) != null) {
-			return true;
-		} else {
-			return false;
-		}
+		return mrepo.save(message) != null;
 	}
 
 	@Override
@@ -51,11 +47,7 @@ public class MessageServiceImpl implements MessageService {
 
 	@Override
 	public boolean updateMessage(Message message) {
-		if(mrepo.save(message) != null) {
-			return true;
-		} else {
-			return false;
-		}
+		return mrepo.save(message) != null;
 	}
 
 	@Override

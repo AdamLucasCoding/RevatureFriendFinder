@@ -39,7 +39,7 @@ public class MessageController {
 		return messageService.getAllMessages();
 	}
 	
-	@GetMapping(path="/message/")
+	@GetMapping(path="/message")
 	public @ResponseBody Message messagesById(@RequestParam(value = "id", name = "id") int id) {
 		return messageService.getMessageById(id);
 	}

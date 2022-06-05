@@ -22,8 +22,7 @@ public class ActivityServiceImpl implements ActivityService {
 
 	@Override
 	public List<Activity> getAllActivities() {
-		List<Activity> allActivities = arepo.findAll();
-		return allActivities;
+		return arepo.findAll();
 	}
 
 	@Override
@@ -35,20 +34,12 @@ public class ActivityServiceImpl implements ActivityService {
 
 	@Override
 	public boolean createActivity(Activity activity) {
-		if(arepo.save(activity) != null) {
-			return true;
-		} else {
-			return false;
-		}
+		return arepo.save(activity) != null;
 	}
 
 	@Override
 	public boolean updateActivity(Activity activity) {
-		if(arepo.save(activity) != null) {
-			return true;
-		} else {
-			return false;
-		}
+		return arepo.save(activity) != null;
 	}
 
 	@Override
@@ -65,13 +56,11 @@ public class ActivityServiceImpl implements ActivityService {
 
 	@Override
 	public List<Activity>  getActivitiesByLocation(String location) {
-		List<Activity> activitiesByLocation = arepo.findByLocation(location);
-		return activitiesByLocation;
+		return arepo.findByLocation(location);
 	}
 
 	@Override
 	public List<Activity>  getActivitiesByCreator(int id) {
-		List<Activity> activitiesByCreator = arepo.findByCreator(id);
-		return activitiesByCreator;
+		return  arepo.findByCreator(id);
 	}
 }
