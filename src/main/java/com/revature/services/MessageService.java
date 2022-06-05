@@ -8,7 +8,7 @@ public interface MessageService {
 	
 	boolean createMessage(Message message);
 	
-	boolean getMessageById(int id);
+	Message getMessageById(int id);
 
 	List<Message> getMessageByAuthor(int author_id);
 
