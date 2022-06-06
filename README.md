@@ -1,8 +1,10 @@
 # RevatureFriendFinderBackend
---note-- view raw for easier view. 
+--note-- view raw for easier view. \
 
 We decided to use the Official Joke api as our chose api for this project. 
 The api servers to give the user a random joke at every page. 
+We also implemented oleksavyshnivsky tablesort plugin api to help sort the tables. 
+
 
 user stories:
 
@@ -20,9 +22,7 @@ users can register themselves.
 users can delete themselves
 users can log in.
 users can log out.
-
-users can Access a profile viewer to view their infomation 
-users can edit their personal information
+users can edit their personal information via a profile manager
 
 
 users can create new events
