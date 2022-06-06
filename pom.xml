@@ -110,6 +110,12 @@
 		    <version>5.8.2</version><!--$NO-MVN-MAN-VER$-->
 		    <scope>test</scope>
 		</dependency>
+		
+		<dependency>
+  <groupId>org.apache.httpcomponents</groupId>
+  <artifactId>httpclient</artifactId>
+  <scope>test</scope>
+</dependency>
 	</dependencies>
 
 	<build>

@@ -42,7 +42,7 @@ public class MessageServiceImpl implements MessageService {
 
 	@Override
 	public Message getMessageById(int id) {
-		return mrepo.findById(id).stream().findFirst().get();
+		return mrepo.findById(id).get();
 	}
 
 	@Override
